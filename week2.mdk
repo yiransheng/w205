@@ -1,0 +1,134 @@
+Title         : Lab 2 Report
+Author        : Yiran Sheng
+Affiliation   : MIDS @ Berkeley
+Email         : yiran@ischool.berkeley.edu
+
+
+Colorizer     : shell
+Bib style     : plainnat
+Bibliography  : example
+Heading base  : 2
+
+Doc class     : [10pt]article
+
+[TITLE]
+
+~ Abstract
+W205 Lab-2 report, focus on HDFS. 
+~
+
+
+# Questions     { #sec-q }
+
+
+## Q1 : What is the basic difference between RDBMS and Hadoop?
+
+The fundamental difference is that Hadoop isn't a database at all.
+
+Hadoop/HDFS is a distributed file system, it let a user to store files across multiple nodes (a cloud of machines, virtual or physical),
+and handles data redundancy. It's not a actual FS either, rather provides a FS-like interface for parallel 
+computing for processing stored files (such as Map-Reduce). 
+
+Unlike RDBMS, where query is executed in realtime, Hadoop supports use cases in the form of batch processing with
+higher latency and much large through put. Also, Hadoop/HDFS makes no assumptions about the data it stores, and
+does not enforce relations on data like RDBMS does (although Hive does allow SQL-like query interfaces). 
+
+RDBMS stores data in a physical file system (typically by rows), and usually stores indices for fast look up, and
+ additional statistics of underlying data, and includes additional components such as query optimizer to better
+ support realtime query of complex relational data. 
+ 
+Conceptually, Hadoop is very simple and transparent while RDBMS usually have opaque inner workings hard to reason
+about from outside. 
+
+
+## Q2 : List out the components of Hadoop?
+
+The core components for Hadoop are HDFS and Map-Reduce. It also includes related components such as: YARN, Hive, HBase,
+and Zookeeper. HDFS is the redundent reliable file storage system, and Map-Reduce is the cluster management and
+file processing component. 
+ 
+
+## Q3 : What are the processes in Hadoop FW?
+
+## Q4 : What kind of replication is present for hdfs?
+
+HDFS stores each file as a sequence of blocks (default size 64 MB); all blocks in a file except the last block are the same size. The blocks of a file are replicated for fault tolerance. The block size and replication factor are configurable per file. Better (newer) hardware can use lower replication factor. 
+
+An application can specify the number of replicas of a file. The replication factor can be specified at file creation time and can be changed later. Files in HDFS are immutable.
+
+The NameNode makes all decisions regarding replication of blocks. It periodically receives a Heartbeat and a Blockreport from each of the DataNodes in the cluster. Receipt of a Heartbeat implies that the DataNode is functioning properly. A Blockreport contains a list of all blocks on a DataNode.
+
+## Q5 : Is Hadoop better for datafiles with small size?
+
+No. For files smaller than HDFS block size (default 64MB), each file will occupy one block and results in lots of blocks. Every file, directory and block in HDFS is represented as an object in the namenode’s memory, each of which occupies 150 bytes, as a rule of thumb. So 10 million files, each using a block, would use about 3 gigabytes of memory. Scaling up much beyond this level is a problem with current hardware. Certainly a billion files is not feasible.
+
+Furthermore, HDFS is not geared up to efficiently accessing small files: it is primarily designed for streaming access of large files. Reading through small files normally causes lots of seeks and lots of hopping from datanode to datanode to retrieve each small file, all of which is an inefficient data access pattern.
+
+Reference:
+> http://blog.cloudera.com/blog/2009/02/the-small-files-problem/
+
+## Q6: since the Hadoop command is deprecated, what can you use instead for same result.
+
+
+For hadoop2, `hadoop1` can be used for classic mode which refers to Hadoop 1.x. 
+
+For `hadoop dfs`, 
+```
+hadoop fs
+``` 
+
+should be used in its place. 
+
+# HDFS basic commands
+
+ssh into ami
+```
+ssh -i MIDS-W205.pem root@ec2-54-237-73-138.compute-1.amazonaws.com
+```
+
+make directory on HDFS:
+```
+$ hadoop fs -ls /
+
+-rw-------   1 root root       5988 2015-09-02 18:32 .bash_history
+-rw-r--r--   1 root root         25 2015-03-17 17:24 .bash_logout
+-rw-r--r--   1 root root        199 2015-03-17 17:24 .bash_profile
+-rw-r--r--   1 root root         75 2015-03-17 18:32 .bashrc
+drwx------   - root root       4096 2015-05-04 03:36 .cache
+drwxr-xr-x   - root root       4096 2015-05-04 03:36 .config
+drwxr-xr-x   - root root       4096 2015-05-04 03:39 .emacs.d
+drwxr-xr-x   - root root       4096 2015-05-04 03:36 .ipython
+drwxr-----   - root root       4096 2015-05-04 02:51 .pki
+drwxr-xr-x   - root root       4096 2015-05-04 03:36 .python-eggs
+-rw-r--r--   1 root root         77 2015-05-04 03:45 .spark_history
+drwx------   - root root       4096 2015-09-02 17:45 .ssh
+drwxr-xr-x   - root root       4096 2015-05-04 03:31 ipython
+drwxr-xr-x   - root root       4096 2015-05-04 03:04 pgxl-deployment-tools
+-rw-r--r--   1 root root          0 2015-09-02 18:07 softwares.txt
+drwxr-xr-x   - root root       4096 2015-05-04 03:34 streamparse
+```
+```
+$ hadoop fs -mkdir /lab2
+```  
+
+add file
+
+```
+$ hadoop fs -put /tmp/words /lab2
+$ hadoop fs -ls /lab2
+Found 1 items
+-rw-r--r--   1 root root    3139450 2015-09-14 06:48 /lab2/words.csv
+```
+
+file size of file
+
+```
+$ hadoop fs -du /lab2     
+$ hadoop fs -du -s /lab2                
+3139450  3139450  /lab2/words.csv
+```
+remove file
+
+```
+$hadoop fs -rm /lab2/words.csv  
+```
