@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="Madoko, version 0.9.5-beta" />
+  <meta name="viewport" content="initial-scale=1.0" />
+  <meta name="author" content="Yiran Sheng" />
+  <title>W205 Lab3</title>
+  <style  class="link">
+  /* ---------------------------------------------------
+     Various settings to display madoko elements correctly.
+     For example, lines in tables or a table of contents.
+  
+     All rules use specific madoko classes and never just
+     a generic element. This means one can safely include
+     this CSS into any web page without affecting non-madoko
+     content.
+  ----------------------------------------------------*/
+  
+  /* The table of  contents */
+  .madoko .toc>.tocblock .tocblock .tocblock {
+    margin-left: 2.5em;
+  }
+  
+  .madoko .toc>.tocblock .tocblock {
+    margin-left: 1.7em;
+  }
+  
+  .madoko .toc>.tocblock>.tocitem {
+    font-weight: bold;
+  }
+  
+  .madoko .toc {
+    margin-top: 1em;
+  }
+  
+  /* Paragraphs */
+  .madoko p.para-continue {
+    margin-bottom: 0pt;
+  }
+  
+  .madoko .para-block+p {
+    margin-top: 0pt;
+  }
+  
+  .madoko ul.para-block, .madoko ol.para-block {
+    margin-top: 0pt;
+    margin-bottom: 0pt;
+  }
+  
+  .madoko ul.para-end, .madoko ol.para-end {
+    margin-bottom: 1em;
+  }
+  
+  .madoko dl {
+    margin-left: 0em;
+  }
+  
+  .madoko blockquote {
+    font-style: italic;
+  }
+  
+  /* Local page links do not get an underline unless hovering */
+  .madoko a.localref {
+    text-decoration: none;
+  }
+  .madoko a.localref:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footnotes */
+  .madoko .footnotes {
+    font-size: smaller;
+    margin-top: 2em;
+  }
+  
+  .madoko .footnotes hr {
+    width: 50%;
+    text-align: left;
+  }
+  
+  .madoko .footnote { 
+    margin-left: 1em;
+  }
+  .madoko .footnote-before {
+    margin-left: -1em;
+    width: 1em;
+    display: inline-block;
+  }
+  
+  /* Abstract */
+  .madoko .abstract>p:first-child:before {
+    content: "Abstract. ";
+    font-weight: bold;
+  }
+  
+  .madoko .abstract {
+    margin-left: 2.7em;
+    margin-right: 2.7em;
+    font-size: small;
+  }
+  
+  
+  /* Alignment */
+  .madoko .align-center, .madoko .align-center>p {
+    text-align: center !important;
+  }
+  
+  .madoko .align-center pre {
+    text-align: left;
+  }
+  
+  .madoko .align-center>* {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .madoko .align-left, .madoko .align-left>p {
+    text-align: left !important;
+  }
+  
+  .madoko .align-left>* {
+    margin-left: 0pt !important;
+    margin-right: auto !important;
+  }
+  
+  .madoko .align-right, .madoko .align-right>p {
+    text-align: right !important;
+  }
+  
+  .madoko .align-right>* {
+    margin-left: auto !important;
+    margin-right: 0pt !important;
+  }
+  
+  .madoko .align-center>table,
+  .madoko .align-left>table,
+  .madoko .align-right>table {
+    text-align: left !important;
+  }
+  
+  
+  /* Equations, Figure's etc. */
+  .madoko .equation-before {
+    float: right;
+  }
+  
+  
+  /* Bibliography */
+  .madoko .bibitem {
+    font-size: smaller;
+  }
+  
+  .madoko .bib-numeric .bibitem {
+    margin-left: 3em;
+    text-indent: -3em;
+  }
+  
+  .madoko .bibitem-before {
+    display: none;
+  }
+  
+  .madoko .bib-numeric .bibitem-before {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+  }
+  
+  .madoko .bibliography {
+  }
+  
+  .madoko .bibsearch {
+    font-size: x-small;
+    text-decoration:none;
+    color: black;
+    font-family: "Segoe UI Symbol", Symbola;
+  }
+  
+  /* General */
+  .madoko .block, .madoko .figure, .madoko .bibitem, .madoko .equation, .madoko div.math {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .figure {
+    padding: 0.5em;
+    margin-left: 0pt;
+    margin-right: 0pt;
+  }
+  
+  .madoko .hidden {
+    display: none;
+  }
+  
+  .madoko .invisible {
+    visibility: hidden;
+  }
+  
+  .madoko.preview .invisible {
+    visibility: visible;
+    opacity: 0.5;
+  }
+  
+  .madoko code.code, .madoko span.code {
+    white-space: pre-wrap;
+  }
+  
+  .madoko hr, hr.madoko {
+    border: none;
+    border-bottom: black solid 1px;
+    margin-bottom: 0.5ex;
+  }
+  
+  .madoko .framed>*:first-child {
+    margin-top: 0pt;
+  }
+  .madoko .framed>*:last-child {
+    margin-bottom: 0pt;
+  }
+  
+  
+  /* Title, authors */
+  /*
+  .madoko .title {
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .subtitle {
+    font-size: x-large;
+    margin-bottom: 1ex;
+    margin-top: -1ex;
+  }
+  
+  .madoko .titleblock>* {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  
+  .madoko .titleblock table {
+    width: 80%;
+  }
+  
+  .madoko .authorblock .author {
+    font-size: large;
+  }
+  
+  .madoko .titlenote {
+    margin-top: -0.5ex;
+    margin-bottom: 1.5ex;
+  }
+  */
+  
+  /* Lists */
+  
+  .madoko ul.list-star {
+    list-style-type: disc;
+  }
+  
+  .madoko ul.list-dash {
+      list-style-type: none !important;
+  }
+  
+  .madoko ul.list-dash > li:before {
+      content: "\2013"; 
+      position: absolute;
+      margin-left: -1em; 
+  }
+  
+  .madoko ul.list-plus {
+    list-style-type: square;
+  }
+  
+  /* Tables */
+  .madoko table.madoko {
+    border-collapse: collapse;
+  }
+  .madoko td, .madoko th {
+    padding: 0ex 0.5ex;
+    margin: 0pt;
+    vertical-align: top;
+  }
+  
+  .madoko .cell-border-left {
+    border-left: 1px solid black;
+  }
+  .madoko .cell-border-right {
+    border-right: 1px solid black;
+  }
+  
+  
+  .madoko thead>tr:first-child>.cell-line,
+  .madoko tbody:first-child>tr:first-child>.cell-line {
+    border-top: 1px solid black;
+    border-bottom: none;
+  }
+  
+  .madoko .cell-line, .madoko .cell-double-line {
+    border-bottom: 1px solid black;
+    border-top: none;
+  }
+  
+  .madoko .cell-double-line {
+    border-top: 1px solid black;
+    padding-top: 1.5px !important;
+  }
+  
+  
+  /* Math Pre */
+  .madoko .input-mathpre .MathJax_Display {
+    text-align: left !important;
+  }
+  
+  .madoko div.input-mathpre {
+    text-align: left;
+    margin-top: 1.5ex;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .math-rendering {
+    color: gray;
+  }
+  
+  /* Math */
+  .madoko .mathdisplay {
+    text-align: center;
+  }
+  
+  
+  /*---------------------------------------------------------------------------
+    Default style for syntax highlighting
+  ---------------------------------------------------------------------------*/
+  
+  .highlighted                        { color: black; }
+  .highlighted .token.identifier      { }
+  .highlighted .token.operators       { }
+  .highlighted .token.keyword         { color: blue }
+  .highlighted .token.string          { color: maroon } 
+  .highlighted .token.string.escape   { color: gray }
+  .highlighted .token.comment         { color: darkgreen }
+  .highlighted .token.comment.doc     { font-style: normal }
+  .highlighted .token.constant        { color: purple; }
+  .highlighted .token.entity          {  }
+  .highlighted .token.tag             { color: blue }
+  .highlighted .token.info-token      { color: black }
+  .highlighted .token.warn-token      { color: black }
+  .highlighted .token.error-token     { color: darkred }
+  .highlighted .token.debug-token     { color: gray }
+  .highlighted .token.regexp          { color: maroon }
+  .highlighted .token.attribute.name  { color: navy }
+  .highlighted .token.attribute.value { color: maroon }
+  .highlighted .token.constructor     { color: purple }
+  .highlighted .token.namespace       { color: navy }
+  .highlighted .token.header          { color: navy }
+  .highlighted .token.type            { color: teal } 
+  .highlighted .token.type.delimiter  { color: teal; } 
+  .highlighted .token.predefined      { color: navy }
+  .highlighted .token.invalid         { border-bottom: red dotted 1px }
+  .highlighted .token.code            { color: maroon }
+  .highlighted .token.code.keyword    { color: navy }
+  .highlighted .token.typevar         { font-style: italic; }
+  
+  .highlighted .token.delimiter   {  } /* .[curly,square,parenthesis,angle,array,bracket] */
+  .highlighted .token.number      {  }    /* .[hex,octal,binary,float] */
+  .highlighted .token.variable    {  }  /* .[name,value]  */
+  .highlighted .token.meta        { color: navy }      /* .[content] */
+  
+  .highlighted .token.bold            { font-weight: bold; }
+  .highlighted .token.italic          { font-style: italic; }
+  
+  
+  /* Pretty formatting of code */
+  .madoko pre.pretty, .madoko code.pretty { 
+    font-family: Cambria,Times,Georgia,serif;
+    font-size: 100%;
+  }
+  
+  .madoko .pretty table {
+    border-collapse: collapse;
+  }
+  .madoko .pretty td {
+    padding: 0em;
+  }
+  .madoko .pretty td.empty {
+    min-width: 1.5ex;
+  }
+  .madoko .pretty td.expander {
+    width: 100em;
+  }
+  .madoko .pretty .token.identifier         { font-style: italic }
+  .madoko .pretty .token.constructor        { font-style: italic }
+  
+  
+  /* ---------------------------------------------------
+     Styling for full documents
+  ----------------------------------------------------*/
+  body.madoko {
+    font-family: Cambria,"Times New Roman","Liberation Serif","Times",serif;
+    -webkit-text-size-adjust: 100%; /* so math displays well on mobile devices */
+  }
+  
+  body.madoko {
+    max-width: 88ex; /* about 88 characters */
+    margin: 1em auto;
+    padding: 0em 2em;  
+  }
+  
+  body.preview.madoko {
+    padding: 0em 1em;
+  }
+  
+  .madoko p,
+  .madoko li {
+    text-align: justify;
+  }
+  
+  /* style headings nicer, especially h5 and h6 */
+  .madoko h1, .madoko h2, .madoko h3, .madoko h4 { 
+    margin-top: 1.22em; 
+    margin-bottom: 1ex;
+  }
+  .madoko h1+p, .madoko h2+p, .madoko h3+p, .madoko h4+p, .madoko h5+p  { 
+    margin-top: 1ex;    
+  }
+  .madoko h5, .madoko h6 { 
+    margin-top: 1ex;
+    font-size: 1em;
+  }
+  .madoko h5 { 
+    margin-bottom: 0.5ex;
+  }
+  .madoko h5 + p {
+    margin-top: 0.5ex;
+  }
+  .madoko h6 { 
+    margin-bottom: 0pt;
+  }
+  .madoko h6 + p {
+    margin-top: 0pt;
+  }
+  
+  
+  /* Fix monospace display (see http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/) */
+  .madoko pre, .madoko code, .madoko kbd, .madoko samp, .madoko tt, .madoko .monospace, .madoko .token.indent, .madoko .reveal pre, .madoko .reveal code, .madoko .email {
+    font-family: Consolas,"Andale Mono WT","Andale Mono",Lucida Console,Monaco,monospace,monospace;
+    font-size: 0.85em;
+  }
+  .madoko pre code, .madoko .token.indent {
+    font-size: 0.95em;
+  }
+  
+  .madoko pre code {
+    font-family: inherit !important;
+  }
+  
+  /* Code prettify */
+  .madoko ol.linenums li {
+    background-color: white;
+    list-style-type: decimal;
+  }
+  
+  /* Merging */
+  .madoko .remote {
+    background-color: #F0FFF0;
+  }
+  .madoko .remote + * {
+    margin-top: 0pt;
+  }
+  
+  /* ---------------------------------------------------
+     Print settings
+  ----------------------------------------------------*/
+  
+  @media print {
+    body.madoko {
+      font-size: 10pt;
+    }
+    @page {
+      margin: 1in 1.5in;
+    }
+  }
+  
+  /* ---------------------------------------------------
+     Mobile device settings
+  ----------------------------------------------------*/
+  
+  @media only screen and (max-device-width:1024px) {
+    body.madoko {
+      padding: 0em 1em;
+    }
+  }
+  
+    </style>
+  
+  </head>
+<body class="madoko">
+
+<div class="body madoko" style="line-adjust:0">
+
+<div class="titleblock align-center para-block" style="line-adjust:0">
+<div class="titleheader align-center" style="line-adjust:0">
+<div class="title para-block" style="font-size:xx-large;font-weight:bold;margin-bottom:0.5ex;line-adjust:0">W205 Lab3</div></div>
+<div class="authors align-center" style="width:80%;line-adjust:0"><table class="authorrow columns block" style="margin-top:2ex;width:100%;line-adjust:0">
+<tbody><tr><td class="author column" style="text-align:center;line-adjust:0">
+<div class="authorname" style="font-size:large;line-adjust:0">Yiran Sheng</div>
+<div class="authoraddress" style="line-adjust:0">Research institute</div>
+<div class="authoremail email" style="line-adjust:0">yiran@ischool.berkeley.edu</div></td></tr></tbody></table></div></div>
+<div class="abstract">
+<p data-line="1"><span data-line="1"></span>W205 Lab3, Hive. </p></div><h2 id="sec-questions"   style="bookmark:1.&#8194;Questions"><span class="heading-before"><span class="heading-label">1</span>.&#8194;</span>Questions</h2><h3 id="sec-q1---where-data-for-a-managed-table-is-stored"   style="bookmark:1.1.&#8194;Q1 : Where data for a Managed table is stored?"><span class="heading-before"><span class="heading-label">1.1</span>.&#8194;</span>Q1 : Where data for a Managed table is stored?</h3>
+<p>The following command produces the location where a given managed table is stored.
+</p>
+<pre class="para-block pre-fenced pre-fenced3"><code>hive -S -e &quot;describe formatted &lt;table_name&gt; ;&quot; | grep &#39;Location&#39; | awk &#39;{ print $NF }&#39;</code></pre>
+<p>For example for Lab3, to find out where table <code class="code code1">Web_Session_Log</code> is stored:
+</p>
+<pre class="para-block pre-fenced pre-fenced3"><code>&gt; hive -S -e &quot;describe formatted Web_Session_Log ;&quot; | grep &#39;Location&#39; | awk &#39;{ print $NF }&#39;  
+file:/user/hive/warehouse/web_session_log_rc  </code></pre>
+<p><strong>Reference:</strong>&nbsp;<a href="http://stackoverflow.com/questions/5058400/where-does-hive-store-its-files-in-hdfs">http://stackoverflow.com/questions/5058400/where-does-hive-store-its-files-in-hdfs</a>
+</p><h3 id="sec-q2---will-the-data-for-an-external-table-drop-if-the-table-is-dropped"   style="bookmark:1.2.&#8194;Q2 : Will the data for an external table drop if the table is dropped?"><span class="heading-before"><span class="heading-label">1.2</span>.&#8194;</span>Q2 : Will the data for an external table drop if the table is dropped?</h3>
+<p>No. Data for external table remain intact even if the table is dropped, only metadata is lost when dropping an external table. 
+</p><h3 id="sec-q3---what-is-the-difference-between-a-rc-and-an-orc-file-format"   style="bookmark:1.3.&#8194;Q3 : What is the difference between a RC and an ORC file format?"><span class="heading-before"><span class="heading-label">1.3</span>.&#8194;</span>Q3 : What is the difference between a RC and an ORC file format?</h3>
+<p>Both RC and ORC are designed to achieve the following goals, ORC is the next iteration of RC file:
+</p>
+<ol class="ol compact">
+<li class="li ol-li compact-li">fast data loading 
+</li>
+<li class="li ol-li compact-li">fast query processing 
+</li>
+<li class="li ol-li compact-li">highly efficient storage space utilization
+</li>
+<li class="li ol-li compact-li">strong adaptivity to highly dynamic workload patterns
+</li></ol>
+
+<p>The RCFile splits data horizontally into row groups. For example, rows 1 to 100 are stored in one group and rows 101 to 200 in the next and so on. One or several groups are stored in a HDFS file. The RCFile saves the row group data in a columnar format. So instead of storing row one then row two, it stores column one across all rows then column two across all rows and so on.
+</p>
+<p class="indent">For ORC format, each file with the columnar layout is optimised for compression and skipping of data/columns to reduce read and decompression load. ORC goes beyond RCFile and uses specific encoders for different column data types to improve compression further, e.g. variable length compression on integers. ORC introduces a lightweight indexing that enables skipping of complete blocks of rows that do not match a query. It comes with basic statistics — min, max, sum, and count — on columns.
+</p><h3 id="sec-q4---in-which-case-you-would-use-parquet-file"   style="bookmark:1.4.&#8194;Q4 : In which case, you would use Parquet file?"><span class="heading-before"><span class="heading-label">1.4</span>.&#8194;</span>Q4 : In which case, you would use Parquet file?</h3>
+<p>Parquet Files are yet another columnar file format that originated from Hadoop creator Doug Cutting’s Trevni project. Like RC and ORC, Parquet enjoys compression and query performance benefits, and is generally slower to write than non-columnar file formats. However, unlike RC and ORC files Parquet serdes support limited schema evolution. In Parquet, new columns can be added at the end of the structure.
+</p>
+<p class="indent">Reference:&nbsp;<a href="http://www.inquidia.com/news-and-info/hadoop-file-formats-its-not-just-csv-anymore">http://www.inquidia.com/news-and-info/hadoop-file-formats-its-not-just-csv-anymore</a>
+</p>
+<p class="indent">If query performance against the data is most important (at a cost of slower writes), and data schema might change, Parquet should be chosen. 
+</p><h3 id="sec-q5---what-are-the-compression-types-allowed-while-using-parquet-file"   style="bookmark:1.5.&#8194;Q5 : What are the compression types allowed while using Parquet file?"><span class="heading-before"><span class="heading-label">1.5</span>.&#8194;</span>Q5 : What are the compression types allowed while using Parquet file?</h3>
+<p>Snappy, GZIP, deflate, BZIP2; currently Snappy by default
+</p><h2 id="sec-lab3-log"   style="bookmark:2.&#8194;Lab3 Log"><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span>Lab3 Log</h2>
+<pre class="para-block pre-fenced pre-fenced3"><code>Script started on Sun 20 Sep 2015 08:34:05 PM PDT
+Last login: Mon Sep 21 03:35:12 2015 from *.*.*.*
+     ___   _        __     __   ____          __
+    / _ \ (_)___ _ / /    / /_ / __/____ ___ _ / /___
+   / , _// // _ `// _ \/ __/_\ \ / __// _ `// // -_)
+  /_/|_|/_/ \_, //_//_/\__//___/ \__/ \_,_//_/ \__/
+       /___/
+
+Welcome to a virtual machine image brought to you by RightScale!
+
+[root@ip-10-109-181-29 ~]# hive
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+WARNING: Hive CLI is deprecated and migration to Beeline is recommended.
+hive&gt; CREATE TABLE Web_Session_Log
+    &gt; (DATETIME varchar(500),
+    &gt; USERID varchar(500),
+    &gt; SESSIONID varchar(500),
+    &gt; PRODUCTID varchar(500),
+    &gt; REFERERURL varchar(500))
+    &gt; row format delimited
+    &gt; fields terminated by &#39;\t&#39;
+    &gt; stored as textfile;
+OK
+Time taken: 2.068 seconds
+[root@ip-10-109-181-29 ~]# wget -O /mnt/weblog_lab.csv https://s3.amazonaws.com/ucbdatasciencew205/labs/weblog_lab.csv
+--2015-09-21 03:41:13--  https://s3.amazonaws.com/ucbdatasciencew205/labs/weblog_lab.csv
+Resolving s3.amazonaws.com... 54.231.12.104
+Connecting to s3.amazonaws.com|54.231.12.104|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 5192992 (5.0M) [application/octet-stream]
+Saving to: “/mnt/weblog_lab.csv”
+
+100%[=====================================================================================================================================================================================================&gt;] 5,192,992     --.-K/s   in 0.1s
+
+2015-09-21 03:41:13 (49.3 MB/s) - “/mnt/weblog_lab.csv” saved [5192992/5192992]
+
+[root@ip-10-109-181-29 ~]# hive
+
+Logging initialized using configuration in file:/etc/hive/conf.dist/hive-log4j.properties
+WARNING: Hive CLI is deprecated and migration to Beeline is recommended.
+hive&gt; LOAD DATA LOCAL INPATH &#39;/mnt/weblog_lab.csv&#39;
+    &gt; OVERWRITE INTO TABLE Web_Session_Log;
+Loading data to table default.web_session_log
+Table default.web_session_log stats: [numFiles=1, numRows=0, totalSize=5192992, rawDataSize=0]
+OK
+Time taken: 2.873 seconds
+hive&gt; CREATE TABLE Web_Session_Log_RC
+    &gt; (DATETIME varchar(500),
+    &gt; USERID varchar(500),
+    &gt; SESSIONID varchar(500),
+    &gt; PRODUCTID varchar(500),
+    &gt; REFERERURL varchar(500))
+    &gt; row format delimited
+    &gt; fields terminated by &#39;\t&#39;
+    &gt; STORED AS RCFILE;
+OK
+Time taken: 0.679 seconds
+hive&gt; INSERT OVERWRITE TABLE Web_Session_Log_RC
+    &gt; select * from Web_Session_Log;
+Query ID = root_20150921034343_76dc9385-5268-48f6-b58f-1480938c4ae1
+Total jobs = 1
+Launching Job 1 out of 1
+Number of reduce tasks is set to 0 since there&#39;s no reduce operator
+Job running in-process (local Hadoop)
+2015-09-21 03:43:58,759 Stage-1 map = 0%,  reduce = 0%
+2015-09-21 03:44:01,776 Stage-1 map = 100%,  reduce = 0%
+Ended Job = job_local1531467897_0001
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to: file:/user/hive/warehouse/web_session_log_rc/.hive-staging_hive_2015-09-21_03-43-53_803_1866694158927763631-1/-ext-10000
+Loading data to table default.web_session_log_rc
+Table default.web_session_log_rc stats: [numFiles=1, numRows=40002, totalSize=5022488, rawDataSize=4952980]
+MapReduce Jobs Launched:
+Stage-Stage-1:    HDFS Read: 0 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+Time taken: 9.088 seconds
+hive&gt; SELECT SESSIONID,count(*) as count from Web_Session_Log_RC GROUP BY SESSIONID ORDER BY count;
+Query ID = root_20150921034545_74c3dd17-a836-44ba-9fda-8ef330e211c7
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=&lt;number&gt;
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=&lt;number&gt;
+Job running in-process (local Hadoop)
+2015-09-21 03:45:27,788 Stage-1 map = 0%,  reduce = 0%
+2015-09-21 03:45:32,858 Stage-1 map = 100%,  reduce = 0%
+2015-09-21 03:45:38,088 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1393157160_0002
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=&lt;number&gt;
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=&lt;number&gt;
+Job running in-process (local Hadoop)
+2015-09-21 03:45:39,572 Stage-2 map = 0%,  reduce = 0%
+2015-09-21 03:45:41,688 Stage-2 map = 100%,  reduce = 0%
+2015-09-21 03:45:42,693 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local1259669617_0003
+MapReduce Jobs Launched:
+Stage-Stage-1:    HDFS Read: 0 HDFS Write: 0 SUCCESS
+Stage-Stage-2:    HDFS Read: 0 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+;+.ASPXAUTH=002N55Q9LOUGP3D3Y    1
+;+.ASPXAUTH=ZZYR86XFZ8I6CHC8X    1
+;+.ASPXAUTH=ZZW94TS26IYDCLOJX    1
+... 
+...
+;+.ASPXAUTH=0051BVNH3NK4VQJHJ    1
+;+.ASPXAUTH=0049F2TBHRUBXCKGM    1
+sessionid    2
+Time taken: 17.665 seconds, Fetched: 40001 row(s)
+hive&gt; CREATE TABLE Web_Session_Log_Managed
+    &gt; (DATETIME varchar(500),
+    &gt; USERID varchar(500),
+    &gt; SESSIONID varchar(500),
+    &gt; PRODUCTID varchar(500),
+    &gt; REFERERURL varchar(500))
+    &gt; row format delimited
+    &gt; fields terminated by &#39;\t&#39;
+    &gt; stored as textfile;
+OK
+Time taken: 0.199 seconds
+hive&gt; CREATE EXTERNAL TABLE IF NOT EXIST Web_Session_Log_External
+    &gt; (DATETIME varchar(500),
+    &gt; USERID varchar(500),
+    &gt; SESSIONID varchar(500),
+    &gt; PRODUCTID varchar(500),
+    &gt; REFERERURL varchar(500))
+    &gt; row format delimited
+    &gt; fields terminated by &#39;\t&#39;
+    &gt; stored as textfile
+    &gt; LOCATION14GK13GK12GK11GK10GK9GK8GK7GKLOCATION &#39;/hiveweblog&#39;;
+NoViableAltException(26@[])
+    at org.apache.hadoop.hive.ql.parse.HiveParser.createTableStatement(HiveParser.java:4686)
+    at org.apache.hadoop.hive.ql.parse.HiveParser.ddlStatement(HiveParser.java:2355)
+    at org.apache.hadoop.hive.ql.parse.HiveParser.execStatement(HiveParser.java:1579)
+    at org.apache.hadoop.hive.ql.parse.HiveParser.statement(HiveParser.java:1057)
+    at org.apache.hadoop.hive.ql.parse.ParseDriver.parse(ParseDriver.java:199)
+    at org.apache.hadoop.hive.ql.parse.ParseDriver.parse(ParseDriver.java:166)
+    at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:393)
+    at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:307)
+    at org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1110)
+    at org.apache.hadoop.hive.ql.Driver.runInternal(Driver.java:1158)
+    at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1047)
+    at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1037)
+    at org.apache.hadoop.hive.cli.CliDriver.processLocalCmd(CliDriver.java:207)
+    at org.apache.hadoop.hive.cli.CliDriver.processCmd(CliDriver.java:159)
+    at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:370)
+    at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:756)
+    at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:675)
+    at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:615)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke(Method.java:606)
+    at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+    at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+FAILED: ParseException line 1:29 missing KW_EXISTS at &#39;EXIST&#39; near &#39;EXIST&#39; in create table statement
+line 1:35 cannot recognize input near &#39;Web_Session_Log_External&#39; &#39;(&#39; &#39;DATETIME&#39; in create table statement
+hive&gt; CREATE EXTERNAL TABLE IF NOT EXISTS Web_Session_Log_External
+    &gt; (DATETIME varchar(500),
+    &gt; USERID varchar(500),
+    &gt; SESSIONID varchar(500),
+    &gt; PRODUCTID varchar(500),
+    &gt; REFERERURL varchar(500))
+    &gt; row format delimited
+    &gt; fields terminated by &#39;\t&#39;
+    &gt; stored as textfile
+    &gt; LOCATION14GK13GK12GK11GK10GK9GK8GK7GKLOCATION &#39;/hiveweblog&#39;;
+OK
+Time taken: 0.106 seconds
+hive&gt; CREATE TABLE ORCFileFormatExample
+    &gt; (DATETIME varchar(500),
+    &gt; USERID varchar(500),
+    &gt; SESSIONID varchar(500),
+    &gt; PRODUCTID varchar(500),
+    &gt; REFERERURL varchar(500))
+    &gt;  COMMENT &#39;This is the Web Session Log data&#39;
+    &gt;  ROW FORMAT DELIMITED
+    &gt;  FIELDS TERMINATED BY &#39;\t&#39;
+    &gt;  STORED AS ORC tblproperties (&quot;orc.compress&quot;=&quot;GLIB&quot;);
+OK
+Time taken: 0.163 seconds
+hive&gt; CREATE TABLE ParqFileFormatExample(
+    &gt; DATETIME varchar(500),
+    &gt; USERID varchar(500),
+    &gt; SESSIONID varchar(500),
+    &gt; PRODUCTID varchar(500),
+    &gt; REFERERURL varchar(500))
+    &gt;  COMMENT &#39;This is the Web Session Log data&#39;
+    &gt;  ROW FORMAT DELIMITED
+    &gt;  FIELDS TERMINATED BY &#39;\t&#39;
+    &gt;  STORED AS parquet;
+OK
+Time taken: 0.14 seconds
+hive&gt; SELECT REFERERURL,count(*) as count from Web_Session_Log_RC GROUP BY REFERERURL ORDER BY count WHERE DATETIME&gt;=&#39;2015-01-01&#39;;130G129G;K129G128G;K128G127G;K127G126G;K126G125G;K125G124G;K124G123G;K123G122G;K122G121G;K121G120G;K120G119G;K119G118G;K118G117G;K117G116G;K116G115G;K115G114G;K114G113G;K113G112G;K112G111G;K111G110G;K110G109G;K109G108G;K108G107G;K107G106G;K106G105G;K105G104G;K104G103G;K103G102G;K102G101G;K101G102G
+Query ID = root_20150921040202_29e8e266-0dd3-4199-ba46-cb947be73162
+Total jobs = 2
+Launching Job 1 out of 2
+Number of reduce tasks not specified. Estimated from input data size: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=&lt;number&gt;
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=&lt;number&gt;
+Job running in-process (local Hadoop)
+2015-09-21 04:02:38,410 Stage-1 map = 100%,  reduce = 100%
+Ended Job = job_local1552098508_0004
+Launching Job 2 out of 2
+Number of reduce tasks determined at compile time: 1
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=&lt;number&gt;
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=&lt;number&gt;
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=&lt;number&gt;
+Job running in-process (local Hadoop)
+2015-09-21 04:02:39,814 Stage-2 map = 100%,  reduce = 100%
+Ended Job = job_local1668584478_0005
+MapReduce Jobs Launched:
+Stage-Stage-1:    HDFS Read: 0 HDFS Write: 0 SUCCESS
+Stage-Stage-2:    HDFS Read: 0 HDFS Write: 0 SUCCESS
+Total MapReduce CPU Time Spent: 0 msec
+OK
+refererurl    2
+http://www.google.com    3878
+http://www.ebay.com    3943
+http://www.abc.com    3951
+http://www.yahoo.com    3987
+http://www.xyz.com    3992
+http://www.homeshop18.com    4026
+http://www.facebook.com 4035
+http://www.shophealthy.com    4050
+http://www.amazon.com    4065
+http://www.twitter.com    4073
+Time taken: 3.012 seconds, Fetched: 11 row(s)
+hive&gt; [root@ip-10-109-181-29 ~]# logout
+&#39;rxvt-unicode-256color&#39;: unknown terminal type.
+Connection to ec2-54-237-2-23.compute-1.amazonaws.com closed.
+0;yiran@yiran-vizio: ~/Documents/mids/W205/awsyiran@yiran-vizio:~/Documents/mids/W205/aws$ exit
+exit
+
+Script done on Sun 20 Sep 2015 09:03:01 PM PDT  
+  </code></pre>
+<div class="logomadoko block" style="text-align:right;font-size:xx-small;margin-top:4em"><span data-line="1"></span>Created with&nbsp;<a href="https://www.madoko.net">Madoko.net</a>.</div></div><span data-line=""></span>
+</body>
+
+</html>
