@@ -1,0 +1,48 @@
+Title         : W205 Lab 4
+Author        : Yiran Sheng
+Affiliation   : UC Berkeley
+Email         : yiran@ischool.berkeley.edu
+
+Colorizer     : shell
+Bib style     : plainnat
+Bibliography  : example
+Heading base  : 2
+
+Doc class     : [10pt]article
+
+[TITLE]
+
+~ Abstract
+W205 Lab 4 report. 
+~
+
+
+# Questions
+
+## Q1: How would partitioning a table help?
+
+Many times in practice, a query on Hive tables does not require full table scan. Instead, user needs filtering on specific columns. Partitioning lets Hive alter the way it manages the underlying structures of the table’s data directory, and use the directory structure itself as filters when querying the data, so that it only read the data file that the user is interested in for a given query. In non-partitioned tables, Hive would have to read all the files in a table’s data directory and subsequently apply filters on it. This is slow and expensive—especially in cases of large tables.
+
+## Q2: Why buckets are created or used?
+
+Bucketing is another technique for decomposing data sets into more manageable parts. Iif we bucket the employee table and use employee_id as the bucketing column, the value of this column will be hashed by a user-defined number into buckets. __Records with the same employee_id will always be stored in the same bucket.__ 
+
+Assuming the number of employee_id is much greater than the number of buckets, each bucket will have many employee_id. While creating table you can specify like CLUSTERED BY (employee_id) INTO XX BUCKETS ; where XX is the number of buckets . Bucketing has several advantages. The number of buckets is fixed so it does not fluctuate with data. If two tables are bucketed by employee_id, Hive can create a logically correct sampling. Bucketing also aids in doing efficient map-side joins etc.
+
+**Refrence: ** [http://stackoverflow.com/questions/19128940/what-is-the-difference-between-partitioning-and-bucketing-a-table-in-hive](http://stackoverflow.com/questions/19128940/what-is-the-difference-between-partitioning-and-bucketing-a-table-in-hive)
+
+## Q3: Using Hive on Tez feature, would it help?
+
+Tez is a new application framework built on Hadoop Yarn that generalizes map-reduce jobs into data processing tasks that can be modeled by a DAG. Map reduce jobs are a subset of Tez execution DAG.  
+
+Hive uses map-reduce as its execution engine. Any query will produce a graph of MR jobs potentially interspersed with some local/client-side work. This leads to many inefficiencies in the planning and execution of queries. 
+
+Hive on Tez improves Hive query performance by using more flexible Tez primitives while remains fully backward compatible with map-reduce execution plans. 
+
+## Q4: What is a DAG?
+
+Directed acyclic graph, a graph with out circles. 
+
+## Q5: Why do u need to register an UDF before using?
+
+Because UDFs are be registered to the metastore, so they can be referenced in a query without having to create a temporary function each session.
