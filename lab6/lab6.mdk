@@ -1,0 +1,108 @@
+Title         : W205 Lab 6
+
+Author        : Yiran Sheng
+Affiliation   : UCB
+Email         : yiran@ischool.berkeley.edu
+
+Heading Base  : 2
+Bib style     : plainnat
+Doc class     : [reprint,nocopyrightspace]style/sigplanconf.cls
+
+[TITLE]
+
+~ Abstract
+W205 Lab 6. An	Introduction	to	Apache	Spark	and	Spark	SQL. Spark is setup on a cluster of three nodes, and running on Yarn. 
+~
+
+~ TexRaw
+% any commands necessary for your particular style
+\category{D.2.5}{Software Engineering}{Testing and Debugging}[symbolic execution]
+\terms{Algorithms, Experimentation}
+\keywords{Games for learning, white box testing}
+~
+
+# Step 0.1	Check	Installation	and	Prepare	Data
+
+There seems to be a problem with AMI ucbw205_complete_plus_postgres (ami-bff58fda), where Spark is not configured properly. 
+
+```
+[root@ip-10-0-0-61 ~]# echo $SPARK_HOME
+/root/spark15
+```
+
+Cause is in `/etc/profile` there's a weird line:
+```
+export SPARK_HOME=$HOME/spark15  
+```
+
+After commenting it out, everything seemed fine. Next adding spark `bin/` directory to `PATH` variable. 
+
+```
+cat <<EOF >> /root/.bash_profile
+export PATH=$SPARK_HOME/bin:$PATH
+EOF  
+```
+
+# Step 0.2 Check Spark on yarn client mode 
+
+I have setup a three-ec2-instance cluster from base ami, in this step try to check if spark runs properly on yarn. 
+
+First, check if yarn nodemanager and resourcemanager are running. 
+
+```
+[root@ip-10-0-0-61 ~]# yarn node -list
+15/10/09 19:48:14 INFO client.RMProxy: Connecting to ResourceManager at master/10.0.0.61:8032
+Total Nodes:3
+         Node-Id	     Node-State	Node-Http-Address	Number-of-Running-Containers
+    slave1:56898	        RUNNING	      slave1:8042	                           0
+    master:52195	        RUNNING	      master:8042	                           0
+    slave2:44917	        RUNNING	      slave2:8042	                           0
+[root@ip-10-0-0-61 ~]# 
+  
+```
+
+Next, start `spark-shell` in `yarn-client` mode
+
+```
+[root@ip-10-0-0-61 ~]# spark-shell --master yarn-client  
+...
+15/10/09 19:50:15 INFO yarn.Client: Application report for application_1444418436488_0003 (state: ACCEPTED)
+...
+```
+
+Logs indiate `yarn` has started a master container for spark. And spark shell is successfully loaded.
+
+```
+scala>  
+```
+List of yarn applications produces:
+
+```
+[root@ip-10-0-0-59 ~]# yarn application -list
+15/10/09 20:02:48 INFO client.RMProxy: Connecting to ResourceManager at master/10.0.0.61:8032
+Total number of applications (application-types: [] and states: [SUBMITTED, ACCEPTED, RUNNING]):1
+                Application-Id	    Application-Name	    Application-Type	      User	     Queue	             State	       Final-State	       Progress	                       Tracking-URL
+application_1444418436488_0004	         Spark shell	               SPARK	      root	 root.root	           RUNNING	         UNDEFINED	            10%	                 http://master:4040  
+```
+Confirms spark is running on yarn. 
+
+# Step 0.3 Download Data and copy to hdfs
+
+Clone github and copy file to hdfs.
+```
+[root@ip-10-0-0-61 ~]# git clone : https://github.com/UC-Berkeley-ISchool/w205-labs-exercises/tree/master/data/Crimes_-_2001_to_present_data
+[root@ip-10-0-0-61 ~]# cd w205-labs-exercises/data/Crimes_-_2001_to_present_data/ 
+[root@ip-10-0-0-61 ~]# gunzip Crimes_-_2001_to_present.csv.gz
+[root@ip-10-0-0-61 ~]# hdfs dfs -mkdir w205lab6
+[root@ip-10-0-0-61 ~]# hdfs dfs -copyFromLocal Crimes_-_2001_to_present_data.csv w205lab6/Crimes_-_2001_to_present_data.csv
+[root@ip-10-0-0-61 ~]# wget https://s3.amazonaws.com/ucbdatasciencew205/labs/weblog_lab.csv -O - | hdfs dfs -put - w205lab6/weblog_lab.csv
+[root@ip-10-0-0-61 ~]# hdfs dfs -ls w205lab6
+```
+
+Output:
+```
+Found 2 items
+-rw-r--r--   1 root supergroup 1376617753 2015-10-09 20:35 w205lab6/Crimes_-_2001_to_present.csv
+-rw-r--r--   1 root supergroup    5192992 2015-10-09 20:40 w205lab6/weblog_lab.csv
+
+```
