@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="Madoko, version 0.9.8-beta" />
+  <meta name="viewport" content="initial-scale=1.0" />
+  <meta name="author" content="Yiran Sheng" />
+  <title>W205 Lab 6</title>
+  <style  class="link">
+  /* ---------------------------------------------------
+     Various settings to display madoko elements correctly.
+     For example, lines in tables or a table of contents.
+  
+     All rules use specific madoko classes and never just
+     a generic element. This means one can safely include
+     this CSS into any web page without affecting non-madoko
+     content.
+  ----------------------------------------------------*/
+  
+  /* The table of  contents */
+  .madoko .toc>.tocblock .tocblock .tocblock {
+    margin-left: 2.5em;
+  }
+  
+  .madoko .toc>.tocblock .tocblock {
+    margin-left: 1.7em;
+  }
+  
+  .madoko .toc>.tocblock>.tocitem {
+    font-weight: bold;
+  }
+  
+  .madoko .toc {
+    margin-top: 1em;
+  }
+  
+  /* Paragraphs */
+  .madoko p.para-continue {
+    margin-bottom: 0pt;
+  }
+  
+  .madoko .para-block+p {
+    margin-top: 0pt;
+  }
+  
+  .madoko ul.para-block, .madoko ol.para-block {
+    margin-top: 0pt;
+    margin-bottom: 0pt;
+  }
+  
+  .madoko ul.para-end, .madoko ol.para-end {
+    margin-bottom: 1em;
+  }
+  
+  .madoko dl {
+    margin-left: 0em;
+  }
+  
+  .madoko blockquote {
+    font-style: italic;
+  }
+  
+  /* Local page links do not get an underline unless hovering */
+  .madoko a.localref {
+    text-decoration: none;
+  }
+  .madoko a.localref:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footnotes */
+  .madoko .footnotes {
+    font-size: smaller;
+    margin-top: 2em;
+  }
+  
+  .madoko .footnotes hr {
+    width: 50%;
+    text-align: left;
+  }
+  
+  .madoko .footnote { 
+    margin-left: 1em;
+  }
+  .madoko .footnote-before {
+    margin-left: -1em;
+    width: 1em;
+    display: inline-block;
+  }
+  
+  /* Abstract */
+  .madoko .abstract>p:first-child:before {
+    content: "Abstract. ";
+    font-weight: bold;
+  }
+  
+  .madoko .abstract {
+    margin-left: 2.7em;
+    margin-right: 2.7em;
+    font-size: small;
+  }
+  
+  
+  /* Alignment */
+  .madoko .align-center, .madoko .align-center>p {
+    text-align: center !important;
+  }
+  
+  .madoko .align-center pre {
+    text-align: left;
+  }
+  
+  .madoko .align-center>* {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .madoko .align-left, .madoko .align-left>p {
+    text-align: left !important;
+  }
+  
+  .madoko .align-left>* {
+    margin-left: 0pt !important;
+    margin-right: auto !important;
+  }
+  
+  .madoko .align-right, .madoko .align-right>p {
+    text-align: right !important;
+  }
+  
+  .madoko .align-right>* {
+    margin-left: auto !important;
+    margin-right: 0pt !important;
+  }
+  
+  .madoko .align-center>table,
+  .madoko .align-left>table,
+  .madoko .align-right>table {
+    text-align: left !important;
+  }
+  
+  
+  /* Equations, Figure's etc. */
+  .madoko .equation-before {
+    float: right;
+  }
+  
+  
+  /* Bibliography */
+  .madoko .bibitem {
+    font-size: smaller;
+  }
+  
+  .madoko .bib-numeric .bibitem {
+    margin-left: 3em;
+    text-indent: -3em;
+  }
+  
+  .madoko .bibitem-before {
+    display: none;
+  }
+  
+  .madoko .bib-numeric .bibitem-before {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+  }
+  
+  .madoko .bibliography {
+  }
+  
+  .madoko .bibsearch {
+    font-size: x-small;
+    text-decoration:none;
+    color: black;
+    font-family: "Segoe UI Symbol", Symbola;
+  }
+  
+  /* General */
+  .madoko .block, .madoko .figure, .madoko .bibitem, .madoko .equation, .madoko div.math {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .figure {
+    padding: 0.5em;
+    margin-left: 0pt;
+    margin-right: 0pt;
+  }
+  
+  .madoko .hidden {
+    display: none;
+  }
+  
+  .madoko .invisible {
+    visibility: hidden;
+  }
+  
+  .madoko.preview .invisible {
+    visibility: visible;
+    opacity: 0.5;
+  }
+  
+  .madoko code.code, .madoko span.code {
+    white-space: pre-wrap;
+  }
+  
+  .madoko hr, hr.madoko {
+    border: none;
+    border-bottom: black solid 1px;
+    margin-bottom: 0.5ex;
+  }
+  
+  .madoko .framed>*:first-child {
+    margin-top: 0pt;
+  }
+  .madoko .framed>*:last-child {
+    margin-bottom: 0pt;
+  }
+  
+  
+  /* Title, authors */
+  /*
+  .madoko .title {
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .subtitle {
+    font-size: x-large;
+    margin-bottom: 1ex;
+    margin-top: -1ex;
+  }
+  
+  .madoko .titleblock>* {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  
+  .madoko .titleblock table {
+    width: 80%;
+  }
+  
+  .madoko .authorblock .author {
+    font-size: large;
+  }
+  
+  .madoko .titlenote {
+    margin-top: -0.5ex;
+    margin-bottom: 1.5ex;
+  }
+  */
+  
+  /* Lists */
+  
+  .madoko ul.list-star {
+    list-style-type: disc;
+  }
+  
+  .madoko ul.list-dash {
+      list-style-type: none !important;
+  }
+  
+  .madoko ul.list-dash > li:before {
+      content: "\2013"; 
+      position: absolute;
+      margin-left: -1em; 
+  }
+  
+  .madoko ul.list-plus {
+    list-style-type: square;
+  }
+  
+  /* Tables */
+  .madoko table.madoko {
+    border-collapse: collapse;
+  }
+  .madoko td, .madoko th {
+    padding: 0ex 0.5ex;
+    margin: 0pt;
+    vertical-align: top;
+  }
+  
+  .madoko .cell-border-left {
+    border-left: 1px solid black;
+  }
+  .madoko .cell-border-right {
+    border-right: 1px solid black;
+  }
+  
+  
+  .madoko thead>tr:first-child>.cell-line,
+  .madoko tbody:first-child>tr:first-child>.cell-line {
+    border-top: 1px solid black;
+    border-bottom: none;
+  }
+  
+  .madoko .cell-line, .madoko .cell-double-line {
+    border-bottom: 1px solid black;
+    border-top: none;
+  }
+  
+  .madoko .cell-double-line {
+    border-top: 1px solid black;
+    padding-top: 1.5px !important;
+  }
+  
+  
+  /* Math Pre */
+  .madoko .input-mathpre .MathJax_Display {
+    text-align: left !important;
+  }
+  
+  .madoko div.input-mathpre {
+    text-align: left;
+    margin-top: 1.5ex;
+    margin-bottom: 1ex;
+  }
+  
+  .madoko .math-rendering {
+    color: gray;
+  }
+  
+  /* Math */
+  .madoko .mathdisplay {
+    text-align: center;
+  }
+  
+  
+  /*---------------------------------------------------------------------------
+    Default style for syntax highlighting
+  ---------------------------------------------------------------------------*/
+  
+  .highlighted                        { color: black; }
+  .highlighted .token.identifier      { }
+  .highlighted .token.operators       { }
+  .highlighted .token.keyword         { color: blue }
+  .highlighted .token.string          { color: maroon } 
+  .highlighted .token.string.escape   { color: gray }
+  .highlighted .token.comment         { color: darkgreen }
+  .highlighted .token.comment.doc     { font-style: normal }
+  .highlighted .token.constant        { color: purple; }
+  .highlighted .token.entity          {  }
+  .highlighted .token.tag             { color: blue }
+  .highlighted .token.info-token      { color: black }
+  .highlighted .token.warn-token      { color: black }
+  .highlighted .token.error-token     { color: darkred }
+  .highlighted .token.debug-token     { color: gray }
+  .highlighted .token.regexp          { color: maroon }
+  .highlighted .token.attribute.name  { color: navy }
+  .highlighted .token.attribute.value { color: maroon }
+  .highlighted .token.constructor     { color: purple }
+  .highlighted .token.namespace       { color: navy }
+  .highlighted .token.header          { color: navy }
+  .highlighted .token.type            { color: teal } 
+  .highlighted .token.type.delimiter  { color: teal; } 
+  .highlighted .token.predefined      { color: navy }
+  .highlighted .token.invalid         { border-bottom: red dotted 1px }
+  .highlighted .token.code            { color: maroon }
+  .highlighted .token.code.keyword    { color: navy }
+  .highlighted .token.typevar         { font-style: italic; }
+  
+  .highlighted .token.delimiter   {  } /* .[curly,square,parenthesis,angle,array,bracket] */
+  .highlighted .token.number      {  }    /* .[hex,octal,binary,float] */
+  .highlighted .token.variable    {  }  /* .[name,value]  */
+  .highlighted .token.meta        { color: navy }      /* .[content] */
+  
+  .highlighted .token.bold            { font-weight: bold; }
+  .highlighted .token.italic          { font-style: italic; }
+  
+  
+  /* Pretty formatting of code */
+  .madoko pre.pretty, .madoko code.pretty { 
+    font-family: Cambria,Times,Georgia,serif;
+    font-size: 100%;
+  }
+  
+  .madoko .pretty table {
+    border-collapse: collapse;
+  }
+  .madoko .pretty td {
+    padding: 0em;
+  }
+  .madoko .pretty td.empty {
+    min-width: 1.5ex;
+  }
+  .madoko .pretty td.expander {
+    width: 100em;
+  }
+  .madoko .pretty .token.identifier         { font-style: italic }
+  .madoko .pretty .token.constructor        { font-style: italic }
+  
+  
+  /* ---------------------------------------------------
+     Styling for full documents
+  ----------------------------------------------------*/
+  body.madoko {
+    font-family: Cambria,"Times New Roman","Liberation Serif","Times",serif;
+    -webkit-text-size-adjust: 100%;       /* so math displays well on mobile devices */
+    text-rendering: optimizeLegibility;
+  }
+  
+  body.madoko {
+    max-width: 88ex; /* about 88 characters */
+    margin: 1em auto;
+    padding: 0em 2em;  
+  }
+  
+  body.preview.madoko {
+    padding: 0em 1em;
+  }
+  
+  .madoko p,
+  .madoko li {
+    text-align: justify;
+  }
+  
+  /* style headings nicer, especially h5 and h6 */
+  .madoko h1, .madoko h2, .madoko h3, .madoko h4 { 
+    margin-top: 1.22em; 
+    margin-bottom: 1ex;
+  }
+  .madoko h1+p, .madoko h2+p, .madoko h3+p, .madoko h4+p, .madoko h5+p  { 
+    margin-top: 1ex;    
+  }
+  .madoko h5, .madoko h6 { 
+    margin-top: 1ex;
+    font-size: 1em;
+  }
+  .madoko h5 { 
+    margin-bottom: 0.5ex;
+  }
+  .madoko h5 + p {
+    margin-top: 0.5ex;
+  }
+  .madoko h6 { 
+    margin-bottom: 0pt;
+  }
+  .madoko h6 + p {
+    margin-top: 0pt;
+  }
+  
+  
+  /* Fix monospace display (see http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/) */
+  .madoko pre, .madoko code, .madoko kbd, .madoko samp, .madoko tt, .madoko .monospace, .madoko .token.indent, .madoko .reveal pre, .madoko .reveal code, .madoko .email {
+    font-family: Consolas,"Andale Mono WT","Andale Mono",Lucida Console,Monaco,monospace,monospace;
+    font-size: 0.85em;
+  }
+  .madoko pre code, .madoko .token.indent {
+    font-size: 0.95em;
+  }
+  
+  .madoko pre code {
+    font-family: inherit !important;
+  }
+  
+  /* Code prettify */
+  .madoko ol.linenums li {
+    background-color: white;
+    list-style-type: decimal;
+  }
+  
+  /* Merging */
+  .madoko .remote {
+    background-color: #F0FFF0;
+  }
+  .madoko .remote + * {
+    margin-top: 0pt;
+  }
+  
+  /* ---------------------------------------------------
+     Print settings
+  ----------------------------------------------------*/
+  
+  @media print {
+    body.madoko {
+      font-size: 10pt;
+    }
+    @page {
+      margin: 1in 1.5in;
+    }
+  }
+  
+  /* ---------------------------------------------------
+     Mobile device settings
+  ----------------------------------------------------*/
+  
+  @media only screen and (max-device-width:1024px) {
+    body.madoko {
+      padding: 0em 1em;
+    }
+  }
+  
+    </style>
+  
+  </head>
+<body class="madoko">
+
+<div class="body madoko" style="line-adjust:0">
+
+<div class="titleblock align-center para-block" style="text-align:center;line-adjust:0">
+<div class="titleheader align-center" style="text-align:center;line-adjust:0">
+<div class="title para-block" style="font-size:xx-large;font-weight:bold;margin-bottom:0.5ex;line-adjust:0">W205 Lab 6</div></div>
+<div class="authors align-center" style="text-align:center;width:80%;line-adjust:0"><table class="authorrow columns block"  style="margin-top:2ex;width:100%;line-adjust:0">
+<tbody><tr><td class="author column"  style="text-align:center;line-adjust:0">
+<div class="authorname" style="font-size:large;line-adjust:0">Yiran Sheng</div>
+<div class="authoraddress" style="line-adjust:0">UCB</div>
+<div class="authoremail email" style="line-adjust:0">yiran@ischool.berkeley.edu</div></td></tr></tbody></table></div></div>
+<div class="abstract" >
+<p class="noindent">W205 Lab 6. An    Introduction    to    Apache    Spark    and    Spark    SQL. Spark is setup on a cluster of three nodes, and running on Yarn. </p></div>
+<h2 id="sec-step-01-check-installation-and-prepare-data"    style="display:block;bookmark:1.&#8194;Step 0.1    Check    Installation    and    Prepare    Data;level:1"><span class="heading-before"><span class="heading-label">1</span>.&#8194;</span>Step 0.1    Check    Installation    and    Prepare    Data</h2>
+<p class="noindent">There seems to be a problem with AMI ucbw205_complete_plus_postgres (ami-bff58fda), where Spark is not configured properly. 
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>[root@ip-10-0-0-61 ~]# echo $SPARK_HOME
+/root/spark15</code></pre>
+<p class="noindent para-continued">Cause is in <code class="code code1" >/etc/profile</code> there&#39;s a weird line:
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>export SPARK_HOME=$HOME/spark15  </code></pre>
+<p class="noindent para-continued">After commenting it out, everything seemed fine. Next adding spark <code class="code code1" >bin/</code> directory to <code class="code code1" >PATH</code> variable. 
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>cat &lt;&lt;EOF &gt;&gt; /root/.bash_profile
+export PATH=$SPARK_HOME/bin:$PATH
+EOF  </code></pre><h2 id="sec-step-02-check-spark-on-yarn-client-mode"    style="display:block;bookmark:2.&#8194;Step 0.2 Check Spark on yarn client mode;level:1"><span class="heading-before"><span class="heading-label">2</span>.&#8194;</span>Step 0.2 Check Spark on yarn client mode</h2>
+<p class="noindent">I have setup a three-ec2-instance cluster from base ami, in this step try to check if spark runs properly on yarn. 
+</p>
+<p class="indent">First, check if yarn nodemanager and resourcemanager are running. 
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>[root@ip-10-0-0-61 ~]# yarn node -list
+15/10/09 19:48:14 INFO client.RMProxy: Connecting to ResourceManager at master/10.0.0.61:8032
+Total Nodes:3
+         Node-Id         Node-State    Node-Http-Address    Number-of-Running-Containers
+    slave1:56898            RUNNING          slave1:8042                               0
+    master:52195            RUNNING          master:8042                               0
+    slave2:44917            RUNNING          slave2:8042                               0
+[root@ip-10-0-0-61 ~]# 
+  </code></pre>
+<p class="noindent para-continued">Next, start <code class="code code1" >spark-shell</code> in <code class="code code1" >yarn-client</code> mode
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>[root@ip-10-0-0-61 ~]# spark-shell --master yarn-client  
+...
+15/10/09 19:50:15 INFO yarn.Client: Application report for application_1444418436488_0003 (state: ACCEPTED)
+...</code></pre>
+<p class="noindent para-continued">Logs indiate <code class="code code1" >yarn</code> has started a master container for spark. And spark shell is successfully loaded.
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>scala&gt;  </code></pre>
+<p class="noindent para-continued">List of yarn applications produces:
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>[root@ip-10-0-0-59 ~]# yarn application -list
+15/10/09 20:02:48 INFO client.RMProxy: Connecting to ResourceManager at master/10.0.0.61:8032
+Total number of applications (application-types: [] and states: [SUBMITTED, ACCEPTED, RUNNING]):1
+                Application-Id        Application-Name        Application-Type          User         Queue                 State           Final-State           Progress                           Tracking-URL
+application_1444418436488_0004             Spark shell                   SPARK          root     root.root               RUNNING             UNDEFINED                10%                     http://master:4040  </code></pre>
+<p class="noindent para-continued">Confirms spark is running on yarn. 
+</p><h2 id="sec-step-03-download-data-and-copy-to-hdfs"    style="display:block;bookmark:3.&#8194;Step 0.3 Download Data and copy to hdfs;level:1"><span class="heading-before"><span class="heading-label">3</span>.&#8194;</span>Step 0.3 Download Data and copy to hdfs</h2>
+<p class="noindent">Clone github and copy file to hdfs.
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>[root@ip-10-0-0-61 ~]# git clone : https://github.com/UC-Berkeley-ISchool/w205-labs-exercises/tree/master/data/Crimes_-_2001_to_present_data
+[root@ip-10-0-0-61 ~]# cd w205-labs-exercises/data/Crimes_-_2001_to_present_data/ 
+[root@ip-10-0-0-61 ~]# gunzip Crimes_-_2001_to_present.csv.gz
+[root@ip-10-0-0-61 ~]# hdfs dfs -mkdir w205lab6
+[root@ip-10-0-0-61 ~]# hdfs dfs -copyFromLocal Crimes_-_2001_to_present_data.csv w205lab6/Crimes_-_2001_to_present_data.csv
+[root@ip-10-0-0-61 ~]# wget https://s3.amazonaws.com/ucbdatasciencew205/labs/weblog_lab.csv -O - | hdfs dfs -put - w205lab6/weblog_lab.csv
+[root@ip-10-0-0-61 ~]# hdfs dfs -ls w205lab6</code></pre>
+<p class="noindent para-continued">Output:
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>Found 2 items
+-rw-r--r--   1 root supergroup 1376617753 2015-10-09 20:35 w205lab6/Crimes_-_2001_to_present.csv
+-rw-r--r--   1 root supergroup    5192992 2015-10-09 20:40 w205lab6/weblog_lab.csv
+</code></pre><h2 id="sec-step-1-start-pyspark"    style="display:block;bookmark:4.&#8194;Step 1.    Start    pyspark;level:1"><span class="heading-before"><span class="heading-label">4</span>.&#8194;</span>Step 1.    Start    pyspark</h2>
+<p class="noindent">Some basic pyspark examples:
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>&gt;&gt;&gt; x = [1,2,3,4,5,6,7,8,9];
+&gt;&gt;&gt; distData = sc.parallelize(x)
+&gt;&gt;&gt; print(distData)
+ParallelCollectionRDD[0] at parallelize at PythonRDD.scala:376
+&gt;&gt;&gt; nx=distData.count() 
+15/10/09 20:53:32 INFO spark.SparkContext: Starting job: count at &lt;stdin&gt;:1
+15/10/09 20:53:33 INFO scheduler.DAGScheduler: Got job 0 (count at &lt;stdin&gt;:1) with 1 output partitions (allowLocal=false)
+15/10/09 20:53:33 INFO scheduler.DAGScheduler: Final stage: Stage 0(count at &lt;stdin&gt;:1)
+15/10/09 20:53:33 INFO scheduler.DAGScheduler: Parents of final stage: List()
+15/10/09 20:53:33 INFO scheduler.DAGScheduler: Missing parents: List()
+15/10/09 20:53:33 INFO scheduler.DAGScheduler: Submitting Stage 0 (PythonRDD[1] at count at &lt;stdin&gt;:1), which has no missing parents
+15/10/09 20:53:33 INFO storage.MemoryStore: ensureFreeSpace(4192) called with curMem=0, maxMem=280248975
+15/10/09 20:53:33 INFO storage.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 4.1 KB, free 267.3 MB)
+15/10/09 20:53:33 INFO storage.MemoryStore: ensureFreeSpace(2709) called with curMem=4192, maxMem=280248975
+15/10/09 20:53:33 INFO storage.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 2.6 KB, free 267.3 MB)
+15/10/09 20:53:33 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:33651 (size: 2.6 KB, free: 267.3 MB)
+15/10/09 20:53:33 INFO storage.BlockManagerMaster: Updated info of block broadcast_0_piece0
+15/10/09 20:53:33 INFO spark.SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:839
+15/10/09 20:53:33 INFO scheduler.DAGScheduler: Submitting 1 missing tasks from Stage 0 (PythonRDD[1] at count at &lt;stdin&gt;:1)
+15/10/09 20:53:33 INFO scheduler.TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
+15/10/09 20:53:33 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, PROCESS_LOCAL, 1282 bytes)
+15/10/09 20:53:33 INFO executor.Executor: Running task 0.0 in stage 0.0 (TID 0)
+15/10/09 20:53:34 INFO python.PythonRDD: Times: total = 1036, boot = 1017, init = 19, finish = 0
+15/10/09 20:53:35 INFO executor.Executor: Finished task 0.0 in stage 0.0 (TID 0). 698 bytes result sent to driver
+15/10/09 20:53:35 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 1284 ms on localhost (1/1)
+15/10/09 20:53:35 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+15/10/09 20:53:35 INFO scheduler.DAGScheduler: Stage 0 (count at &lt;stdin&gt;:1) finished in 1.399 s
+15/10/09 20:53:35 INFO scheduler.DAGScheduler: Job 0 finished: count at &lt;stdin&gt;:1, took 2.228150 s
+&gt;&gt;&gt; print nx
+9  </code></pre><h2 id="sec-step-2-load-a-file-and-count-the-rows"    style="display:block;bookmark:5.&#8194;Step 2.    Load    a    File    and    Count    the    Rows;level:1"><span class="heading-before"><span class="heading-label">5</span>.&#8194;</span>Step 2.    Load    a    File    and    Count    the    Rows</h2>
+<p class="noindent">We run <code class="code code1" >pyspark</code> in yarn-client mode.
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>[root@ip-10-0-0-61 ~]# pyspark --master yarn-client  </code></pre>
+<pre class="para-block pre-fenced pre-fenced3" ><code># csv file is read from hdfs
+&gt;&gt;&gt; crimedata = sc.textFile(&quot;hdfs:///user/root/w205lab6/Crimes_-_2001_to_present.csv&quot;)
+&gt;&gt;&gt; crimedata.count()                                                                 
+[Stage 0:&gt;                                                         (0 + 2) / 11]
+
+5862796
+&gt;&gt;&gt; crimedata.first()
+u&#39;ID,Case Number,Date,Block,IUCR,Primary Type,Description,Location Description,Arrest,Domestic,Beat,District,Ward,Community Area,FBI Code,X Coordinate,Y Coordinate,Year,Updated On,Latitude,Longitude,Location&#39;
+&gt;&gt;&gt; crimedata.take(10)    
+[u&#39;ID,Case Number,Date,Block,IUCR,Primary Type,Description,Location Description,Arrest,Domestic,Beat,District,Ward,Community Area,FBI Code,X Coordinate,Y Coordinate,Year,Updated On,Latitude,Longitude,Location&#39;, u&#39;10184515,HY372204,08/06/2015 11:55:00 PM,033XX W DIVERSEY AVE,2027,NARCOTICS,POSS: CRACK,STREET,true,false,1412,014,35,22,18,1153440,1918377,2015,08/13/2015 12:57:42 PM,41.931870591,-87.711546895,&quot;(41.931870591, -87.711546895)&quot;&#39;, u&#39;10184607,HY372206,08/06/2015 11:55:00 PM,035XX S RHODES AVE,0486,BATTERY,DOMESTIC BATTERY SIMPLE,APARTMENT,false,true,0212,002,4,35,08B,1180132,1881331,2015,08/13/2015 12:57:42 PM,41.82964147,-87.614598779,&quot;(41.82964147, -87.614598779)&quot;&#39;, u&#39;10190430,HY374464,08/06/2015 11:50:00 PM,047XX W HARRISON ST,0430,BATTERY,AGGRAVATED: OTHER DANG WEAPON,GAS STATION,false,false,1131,011,24,25,04B,1144626,1896881,2015,08/13/2015 12:57:42 PM,41.873054046,-87.744479572,&quot;(41.873054046, -87.744479572)&quot;&#39;, u&#39;10185476,HY372534,08/06/2015 11:50:00 PM,030XX W FLETCHER ST,0620,BURGLARY,UNLAWFUL ENTRY,RESIDENCE-GARAGE,false,false,1411,014,33,21,05,1155716,1920830,2015,08/13/2015 12:57:42 PM,41.938556204,-87.703116637,&quot;(41.938556204, -87.703116637)&quot;&#39;, u&#39;10184561,HY372224,08/06/2015 11:50:00 PM,034XX S RACINE AVE,0820,THEFT,$500 AND UNDER,PARKING LOT/GARAGE(NON.RESID.),true,false,0913,009,11,60,06,1168866,1881886,2015,08/13/2015 12:57:42 PM,41.831415654,-87.655917306,&quot;(41.831415654, -87.655917306)&quot;&#39;, u&#39;10184518,HY372189,08/06/2015 11:45:00 PM,038XX S HONORE ST,1310,CRIMINAL DAMAGE,TO PROPERTY,RESIDENCE,false,false,0912,009,11,59,14,1164617,1879167,2015,08/13/2015 12:57:42 PM,41.824045312,-87.671584096,&quot;(41.824045312, -87.671584096)&quot;&#39;, u&#39;10184620,HY372195,08/06/2015 11:45:00 PM,011XX N WELLS ST,0810,THEFT,OVER $500,TAXICAB,false,false,1824,018,43,8,06,1174556,1907722,2015,08/13/2015 12:57:42 PM,41.902186365,-87.634268385,&quot;(41.902186365, -87.634268385)&quot;&#39;, u&#39;10184573,HY372193,08/06/2015 11:44:00 PM,012XX W 82ND ST,0460,BATTERY,SIMPLE,SIDEWALK,false,false,0613,006,21,71,08B,1169200,1850440,2015,08/13/2015 12:57:42 PM,41.74511691,-87.655601328,&quot;(41.74511691, -87.655601328)&quot;&#39;, u&#39;10184606,HY372191,08/06/2015 11:40:00 PM,048XX S INDIANA AVE,0486,BATTERY,DOMESTIC BATTERY SIMPLE,ALLEY,false,true,0224,002,3,38,08B,1178377,1872994,2015,08/13/2015 12:57:42 PM,41.80680416,-87.621291256,&quot;(41.80680416, -87.621291256)&quot;&#39;]
+&gt;&gt;&gt; noHeaderCrimedata = crimedata.zipWithIndex().filter(lambda (row,index): index &gt;0).keys()
+&gt;&gt;&gt; noHeaderCrimedata.first()                                                   
+u&#39;10184515,HY372204,08/06/2015 11:55:00 PM,033XX W DIVERSEY AVE,2027,NARCOTICS,POSS: CRACK,STREET,true,false,1412,014,35,22,18,1153440,1918377,2015,08/13/2015 12:57:42 PM,41.931870591,-87.711546895,&quot;(41.931870591, -87.711546895)&quot;&#39;</code></pre><h2 id="sec-step-3-filter-records-and-structures"    style="display:block;bookmark:6.&#8194;Step 3.    Filter Records and    Structures;level:1"><span class="heading-before"><span class="heading-label">6</span>.&#8194;</span>Step 3.    Filter Records and    Structures</h2>
+<pre class="para-block pre-fenced pre-fenced3" ><code>&gt;&gt;&gt; narcoticsCrimes = noHeaderCrimedata.filter(lambda x:&quot;NARCOTICS&quot; in x)
+&gt;&gt;&gt; narcoticsCrimes.count()
+663712                                                                          
+&gt;&gt;&gt; narcoticsCrimeRecords = narcoticsCrimes.map(lambda r :r.split(&quot;,&quot;))
+&gt;&gt;&gt; narcoticsCrimeRecords.first()
+[u&#39;10184515&#39;, u&#39;HY372204&#39;, u&#39;08/06/2015 11:55:00 PM&#39;, u&#39;033XX W DIVERSEY AVE&#39;, u&#39;2027&#39;, u&#39;NARCOTICS&#39;, u&#39;POSS: CRACK&#39;, u&#39;STREET&#39;, u&#39;true&#39;, u&#39;false&#39;, u&#39;1412&#39;, u&#39;014&#39;, u&#39;35&#39;, u&#39;22&#39;, u&#39;18&#39;, u&#39;1153440&#39;, u&#39;1918377&#39;, u&#39;2015&#39;, u&#39;08/13/2015 12:57:42 PM&#39;, u&#39;41.931870591&#39;, u&#39;-87.711546895&#39;, u&#39;&quot;(41.931870591&#39;, u&#39; -87.711546895)&quot;&#39;]  </code></pre><h2 id="sec-step-4-key-values"    style="display:block;bookmark:7.&#8194;Step 4.    Key Values;level:1"><span class="heading-before"><span class="heading-label">7</span>.&#8194;</span>Step 4.    Key Values</h2>
+<pre class="para-block pre-fenced pre-fenced3" ><code>&gt;&gt;&gt; narcoticsCrimeRecords = narcoticsCrimes.map(lambda r :r.split(&quot;,&quot;))
+&gt;&gt;&gt; narcoticsCrimeRecords.first()
+[u&#39;10184515&#39;, u&#39;HY372204&#39;, u&#39;08/06/2015 11:55:00 PM&#39;, u&#39;033XX W DIVERSEY AVE&#39;, u&#39;2027&#39;, u&#39;NARCOTICS&#39;, u&#39;POSS: CRACK&#39;, u&#39;STREET&#39;, u&#39;true&#39;, u&#39;false&#39;, u&#39;1412&#39;, u&#39;014&#39;, u&#39;35&#39;, u&#39;22&#39;, u&#39;18&#39;, u&#39;1153440&#39;, u&#39;1918377&#39;, u&#39;2015&#39;, u&#39;08/13/2015 12:57:42 PM&#39;, u&#39;41.931870591&#39;, u&#39;-87.711546895&#39;, u&#39;&quot;(41.931870591&#39;, u&#39; -87.711546895)&quot;&#39;]
+&gt;&gt;&gt; narcoticsCrimeTuples = narcoticsCrimes.map(lambda x:(x.split(&quot;,&quot;)[0], x))
+&gt;&gt;&gt; narcoticsCrimeTuples = narcoticsCrimes.map(lambda x:(x.split(&quot;,&quot;)[0], x))
+&gt;&gt;&gt; sorted=narcoticsCrimeTuples.sortByKey()
+&gt;&gt;&gt; sorted.take(10)                          </code></pre>
+<p class="noindent para-continued">First 10 records of sorted narcotics crime (pretty printed as json, tuples are coresed into arrays):
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>&gt;&gt;&gt; print( json.dumps(sorted.take(10), indent=4, separators=(&#39;,&#39;, &#39;: &#39;)) )
+[
+    [
+        &quot;10000014&quot;,
+        &quot;10000014,HY189846,03/18/2015 05:52:00 PM,107XX S EGGLESTON AVE,1822,NARCOTICS,MANU/DEL:CANNABIS OVER 10 GMS,RESIDENCE,true,false,2233,022,34,49,18,1175162,1833372,2015,03/25/2015 12:42:30 PM,41.698149046,-87.634263523,\&quot;(41.698149046, -87.634263523)\&quot;&quot;
+    ],
+    [
+        &quot;10000015&quot;,
+        &quot;10000015,HY190002,03/18/2015 10:00:00 PM,001XX S SPRINGFIELD AVE,2027,NARCOTICS,POSS: CRACK,SIDEWALK,true,false,1122,011,28,26,18,1150447,1899324,2015,03/25/2015 12:42:30 PM,41.879646339,-87.723043936,\&quot;(41.879646339, -87.723043936)\&quot;&quot;
+    ],
+    [
+        &quot;10000018&quot;,
+        &quot;10000018,HY189982,03/18/2015 09:20:00 PM,018XX E 75TH ST,2028,NARCOTICS,POSS: SYNTHETIC DRUGS,STREET,true,false,0324,003,8,43,18,1189965,1855654,2015,03/25/2015 12:42:30 PM,41.758950606,-87.579348528,\&quot;(41.758950606, -87.579348528)\&quot;&quot;
+    ],
+    [
+        &quot;10000032&quot;,
+        &quot;10000032,HY190005,03/18/2015 10:00:00 PM,078XX S KEDZIE AVE,2024,NARCOTICS,POSS: HEROIN(WHITE),STREET,true,false,0835,008,18,70,18,1156360,1852673,2015,03/25/2015 12:42:30 PM,41.751512505,-87.702589481,\&quot;(41.751512505, -87.702589481)\&quot;&quot;
+    ],
+    [
+        &quot;10000033&quot;,
+        &quot;10000033,HY189981,03/18/2015 09:45:00 PM,032XX W 23RD ST,1811,NARCOTICS,POSS: CANNABIS 30GMS OR LESS,SIDEWALK,true,false,1024,010,22,30,18,1154889,1888566,2015,03/25/2015 12:42:30 PM,41.850037381,-87.707021653,\&quot;(41.850037381, -87.707021653)\&quot;&quot;
+    ],
+    [
+        &quot;10000036&quot;,
+        &quot;10000036,HY189959,03/18/2015 09:37:00 PM,079XX S LOOMIS BLVD,1811,NARCOTICS,POSS: CANNABIS 30GMS OR LESS,STREET,true,false,0612,006,21,71,18,1168414,1852212,2015,03/25/2015 12:42:30 PM,41.749996475,-87.658430431,\&quot;(41.749996475, -87.658430431)\&quot;&quot;
+    ],
+    [
+        &quot;10000038&quot;,
+        &quot;10000038,HY189993,03/18/2015 10:00:00 PM,055XX N WESTERN AVE,1811,NARCOTICS,POSS: CANNABIS 30GMS OR LESS,STREET,true,false,2012,020,40,4,18,1159361,1936925,2015,03/25/2015 12:42:30 PM,41.982647434,-87.689275782,\&quot;(41.982647434, -87.689275782)\&quot;&quot;
+    ],
+    [
+        &quot;10000049&quot;,
+        &quot;10000049,HY190034,03/18/2015 10:45:00 PM,003XX N WALLER AVE,1811,NARCOTICS,POSS: CANNABIS 30GMS OR LESS,SIDEWALK,true,false,1512,015,29,25,18,1138053,1901603,2015,03/25/2015 12:42:30 PM,41.886133043,-87.768498451,\&quot;(41.886133043, -87.768498451)\&quot;&quot;
+    ],
+    [
+        &quot;10000050&quot;,
+        &quot;10000050,HY190024,03/18/2015 09:55:00 PM,015XX S CALIFORNIA BLVD,2093,NARCOTICS,FOUND SUSPECT NARCOTICS,HOSPITAL BUILDING/GROUNDS,true,false,1022,010,12,29,26,1157891,1892607,2015,03/25/2015 12:42:30 PM,41.861065709,-87.695893691,\&quot;(41.861065709, -87.695893691)\&quot;&quot;
+    ],
+    [
+        &quot;10000058&quot;,
+        &quot;10000058,HY190039,03/18/2015 10:38:00 PM,120XX S LAFAYETTE AVE,1811,NARCOTICS,POSS: CANNABIS 30GMS OR LESS,RESIDENTIAL YARD (FRONT/BACK),true,false,0523,005,9,53,18,1178055,1825033,2015,03/25/2015 12:42:30 PM,41.675200673,-87.623922325,\&quot;(41.675200673, -87.623922325)\&quot;&quot;
+    ]
+]  </code></pre><h2 id="sec-step-5-start-spark-sql"    style="display:block;bookmark:8.&#8194;Step 5.    Start    Spark SQL;level:1"><span class="heading-before"><span class="heading-label">8</span>.&#8194;</span>Step 5.    Start    Spark SQL</h2>
+<pre class="para-block pre-fenced pre-fenced3" ><code>spark-sql&gt; create table Web_Session_Log
+    &gt;(DATETIME varchar(500),
+    &gt;USERID varchar(500),
+    &gt;SESSIONID varchar(500),
+    &gt;PRODUCTID varchar(500),
+    &gt;REFERERURL varchar(500))
+    &gt;row format delimited fields terminated by &#39;\t&#39;
+    &gt;stored as textfile;
+
+spark-sql&gt; LOAD DATA LOCAL INPATH &quot;./weblog_lab.csv&quot; INTO TABLE web_session_log;
+spark-sql&gt; select count(*) from web_session_log;
+
+40002
+Time taken: 5.569 seconds, Fetched 1 row(s)</code></pre>
+<p class="noindent para-continued"><strong class="strong17" >Submission 2:</strong>
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>spark-sql&gt; select count(*) from web_session_log where REFERERURL=&quot;http://www.ebay.com&quot;;
+7886
+Time taken: 6.157 seconds, Fetched 1 row(s)
+spark-sql&gt; select * from web_session_log where REFERERURL=&quot;http://www.ebay.com&quot; limit 10;
+2005-12-08 02:36:30    __RequestVerificationToken_Lw__=13233    ;+.ASPXAUTH=H7HTS9Q9CC8ZXSERD    /product/MVI9HHP8A    http://www.ebay.com
+2013-05-03 06:15:05    __RequestVerificationToken_Lw__=3BA1D    ;+.ASPXAUTH=N41PO4EPE50XRBRPK    /product/6DVRETE0C    http://www.ebay.com
+2015-03-07 09:28:10    __RequestVerificationToken_Lw__=323AC    ;+.ASPXAUTH=K1SNTY3UJGRQRLHCK    /product/GD3SDW1TA    http://www.ebay.com
+2005-08-10 23:11:45    __RequestVerificationToken_Lw__=1DD3C    ;+.ASPXAUTH=4681QM0Q72WLPWFYX    /product/YGXQ90Z1Y    http://www.ebay.com
+2012-08-12 07:23:58    __RequestVerificationToken_Lw__=3AD23    ;+.ASPXAUTH=LREO8TMSH04D2GE7M    /search/M6YZ29JA5    http://www.ebay.com
+2015-09-16 16:41:46    __RequestVerificationToken_Lw__=22DA3    ;+.ASPXAUTH=ODD79MLRHOBJTNF3J    /product/1TPEZJXPV    http://www.ebay.com
+2010-10-30 18:42:10    __RequestVerificationToken_Lw__=2221C    ;+.ASPXAUTH=O2FW5JJ0WHUFRF4VH    /search/IJTXBGB7L    http://www.ebay.com
+2004-09-14 17:25:27    __RequestVerificationToken_Lw__=DB333    ;+.ASPXAUTH=9IAO311QV3B935DQS    /search/SOOG2281O    http://www.ebay.com
+2013-09-15 13:03:49    __RequestVerificationToken_Lw__=DBD21    ;+.ASPXAUTH=SCQTL4ZE4Y2OFFZM5    /product/LRPBZBPTB    http://www.ebay.com
+2015-09-07 04:37:01    __RequestVerificationToken_Lw__=DCC2A    ;+.ASPXAUTH=6V1R8D0FQLPLSXPOW    /search/HEC6W17O6    http://www.ebay.com
+Time taken: 0.817 seconds, Fetched 10 row(s)
+</code></pre><h2 id="sec-step-7-accessing-spark-sql-in-python-code"    style="display:block;bookmark:9.&#8194;Step 7.    Accessing    Spark SQL    in    Python    Code;level:1"><span class="heading-before"><span class="heading-label">9</span>.&#8194;</span>Step 7.    Accessing    Spark SQL    in    Python    Code</h2>
+<pre class="para-block pre-fenced pre-fenced3" ><code>&gt;&gt;&gt; from pyspark.sql import SQLContext
+&gt;&gt;&gt; from pyspark.sql.types import *
+&gt;&gt;&gt; sqlContext = SQLContext(sc)
+&gt;&gt;&gt; lines = sc.textFile(&#39;file:///root/weblog_lab.csv&#39;)
+&gt;&gt;&gt; parts = lines.map(lambda l: l.split(&#39;\t&#39;)) 
+&gt;&gt;&gt; Web_Session_Log = parts.map(lambda p: (p[0], p[1],p[2],p[3],p[4]))
+&gt;&gt;&gt; schemaString = &#39;DATETIME USERID SESSIONID PRODUCTID REFERERURL&#39;
+&gt;&gt;&gt; fields = [StructField(field_name, StringType(), True) for field_name in schemaString.split()]
+&gt;&gt;&gt; schema = StructType(fields)
+&gt;&gt;&gt; schemaWebData = sqlContext.createDataFrame(Web_Session_Log, schema)
+&gt;&gt;&gt; schemaWebData.registerTempTable(&#39;Web_Session_Log&#39;)
+&gt;&gt;&gt; results = sqlContext.sql(&#39;SELECT count(*) FROM Web_Session_Log&#39;)
+&gt;&gt;&gt; results.show()
++-----+
+|  _c0|
++-----+
+|40002|
++-----+
+&gt;&gt;&gt; ebay = sqlContext.sql(&#39;select count(*) from Web_Session_Log where REFERERURL=&quot;http://www.ebay.com&quot;&#39;)
+&gt;&gt;&gt; ebay.show()</code></pre>
+<p class="noindent para-continued"><strong class="strong17" >Submission 2:</strong>
+</p>
+<pre class="para-block pre-fenced pre-fenced3" ><code>+----+
+| _c0|
++----+
+|3943|
++----+</code></pre>
+<pre class="para-block pre-fenced pre-fenced3" ><code>  </code></pre></div><span data-line=""></span>
+</body>
+
+</html>
