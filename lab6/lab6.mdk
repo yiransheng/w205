@@ -234,4 +234,76 @@ First 10 records of sorted narcotics crime (pretty printed as json, tuples are c
 ```
 # Step 5.	Start	Spark SQL
 
+```
+spark-sql> create table Web_Session_Log
+    >(DATETIME varchar(500),
+    >USERID varchar(500),
+    >SESSIONID varchar(500),
+    >PRODUCTID varchar(500),
+    >REFERERURL varchar(500))
+    >row format delimited fields terminated by '\t'
+    >stored as textfile;
 
+spark-sql> LOAD DATA LOCAL INPATH "./weblog_lab.csv" INTO TABLE web_session_log;
+spark-sql> select count(*) from web_session_log;
+
+40002
+Time taken: 5.569 seconds, Fetched 1 row(s)
+```
+__Submission 2:__
+```
+spark-sql> select count(*) from web_session_log where REFERERURL="http://www.ebay.com";
+7886
+Time taken: 6.157 seconds, Fetched 1 row(s)
+spark-sql> select * from web_session_log where REFERERURL="http://www.ebay.com" limit 10;
+2005-12-08 02:36:30	__RequestVerificationToken_Lw__=13233	;+.ASPXAUTH=H7HTS9Q9CC8ZXSERD	/product/MVI9HHP8A	http://www.ebay.com
+2013-05-03 06:15:05	__RequestVerificationToken_Lw__=3BA1D	;+.ASPXAUTH=N41PO4EPE50XRBRPK	/product/6DVRETE0C	http://www.ebay.com
+2015-03-07 09:28:10	__RequestVerificationToken_Lw__=323AC	;+.ASPXAUTH=K1SNTY3UJGRQRLHCK	/product/GD3SDW1TA	http://www.ebay.com
+2005-08-10 23:11:45	__RequestVerificationToken_Lw__=1DD3C	;+.ASPXAUTH=4681QM0Q72WLPWFYX	/product/YGXQ90Z1Y	http://www.ebay.com
+2012-08-12 07:23:58	__RequestVerificationToken_Lw__=3AD23	;+.ASPXAUTH=LREO8TMSH04D2GE7M	/search/M6YZ29JA5	http://www.ebay.com
+2015-09-16 16:41:46	__RequestVerificationToken_Lw__=22DA3	;+.ASPXAUTH=ODD79MLRHOBJTNF3J	/product/1TPEZJXPV	http://www.ebay.com
+2010-10-30 18:42:10	__RequestVerificationToken_Lw__=2221C	;+.ASPXAUTH=O2FW5JJ0WHUFRF4VH	/search/IJTXBGB7L	http://www.ebay.com
+2004-09-14 17:25:27	__RequestVerificationToken_Lw__=DB333	;+.ASPXAUTH=9IAO311QV3B935DQS	/search/SOOG2281O	http://www.ebay.com
+2013-09-15 13:03:49	__RequestVerificationToken_Lw__=DBD21	;+.ASPXAUTH=SCQTL4ZE4Y2OFFZM5	/product/LRPBZBPTB	http://www.ebay.com
+2015-09-07 04:37:01	__RequestVerificationToken_Lw__=DCC2A	;+.ASPXAUTH=6V1R8D0FQLPLSXPOW	/search/HEC6W17O6	http://www.ebay.com
+Time taken: 0.817 seconds, Fetched 10 row(s)
+
+```
+
+
+
+# Step 7.	Accessing	Spark SQL	in	Python	Code
+
+```
+>>> from pyspark.sql import SQLContext
+>>> from pyspark.sql.types import *
+>>> sqlContext = SQLContext(sc)
+>>> lines = sc.textFile('file:///root/weblog_lab.csv')
+>>> parts = lines.map(lambda l: l.split('\t')) 
+>>> Web_Session_Log = parts.map(lambda p: (p[0], p[1],p[2],p[3],p[4]))
+>>> schemaString = 'DATETIME USERID SESSIONID PRODUCTID REFERERURL'
+>>> fields = [StructField(field_name, StringType(), True) for field_name in schemaString.split()]
+>>> schema = StructType(fields)
+>>> schemaWebData = sqlContext.createDataFrame(Web_Session_Log, schema)
+>>> schemaWebData.registerTempTable('Web_Session_Log')
+>>> results = sqlContext.sql('SELECT count(*) FROM Web_Session_Log')
+>>> results.show()
++-----+
+|  _c0|
++-----+
+|40002|
++-----+
+>>> ebay = sqlContext.sql('select count(*) from Web_Session_Log where REFERERURL="http://www.ebay.com"')
+>>> ebay.show()
+```
+__Submission 2:__
+```
++----+
+| _c0|
++----+
+|3943|
++----+
+```
+```
+  
+```
