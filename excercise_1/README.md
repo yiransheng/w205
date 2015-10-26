@@ -193,7 +193,16 @@ __Script__: `/investigations/best_states/best_states.sql`
 __Results:__
 
 ```
-
+DC  100.98529411764706
+MD  100.37987987987988
+DE  99.98744769874477
+NY  96.80901713255184
+NJ  96.39256535947712
+NV  96.01920768307323
+NH  95.55102040816327
+VI  95.45833333333333
+CA  95.29843735020611
+CT  95.15523809523809
 ```
 
 *  Which procedures have the greatest variability between hospitals?
@@ -202,8 +211,28 @@ __Script__: `/investigations/hospital_variability/hospital_variability.sql`
 
 __Results:__
 
-```
+(Variability measured by standard deviation of score, third column below)
 
+```
+CAC_1	Relievers for Inpatient Asthma	0.14210359538237247
+CAC_2	Systemic Corticosteroids for Inpatient Asthma	1.283411995128645
+OP_22	Patient left without being seen	1.716651736642136
+AMI_2	Aspirin Prescribed at Discharge	3.805963814902322
+STK_2	Discharged on Antithrombotic Therapy	3.882239441173123
+OP_7	Prophylactic Antibiotic Selection for Surgical Patients	3.915771074179818
+SCIP_VTE_2	Surgery Patients Who Received Appropriate Venous Thromboembolism Prophylaxis Within 24 Hours Prior to Surgery to 24 Hours After Surgery	4.6923485225052755
+OP_6	Timing of Antibiotic Prophylaxis	5.069025482798145
+OP_4	Aspirin at Arrival	5.206198494502723
+STK_5	Antithrombotic Therapy By End of Hospital Day 2	5.370756360124224
+VTE_4	Venous Thromboembolism Patients Receiving Unfractionated Heparin with Dosages/Platelet Count Monitoring by Protocol or Nomogram	5.590660865039616
+AMI_10	Statin Prescribed at Discharge	5.620962943158109
+STK_10	Assessed for Rehabilitation	5.668900431041956
+OP_5	Median Time to ECG	6.109381800089672
+STK_3	Anticoagulation Therapy for Atrial Fibrillation/Flutter	6.2262197795529595
+HF_3	ACEI or ARB for LVSD	6.460854228892995
+AMI_8a	Primary PCI Received Within 90 Minutes of Hospital Arrival	6.694532539262592
+PC_01	Elective Delivery	6.958257962124783
+VTE_2	Intensive Care Unit Venous Thromboembolism Prophylaxis	7.478245376071566
 ```
 
 * Are average scores for hospital quality or procedural variability correlated with patient survey responses?
@@ -211,7 +240,31 @@ __Results:__
 __Script__: `/investigations/hospitals_and_patients/hospitals_and_patients.sql`
 
 __Results:__
+```
+# Hospital ID    Hospital Name    Quality Score    Survey Score
+450348  	FALLS COMMUNITY HOSPITAL AND CLINIC                 	235.58333333333334	62.0
+310002  	NEWARK BETH ISRAEL MEDICAL CENTER                   	134.81578947368422	0.0
+140300  	PROVIDENT HOSPITAL OF CHICAGO                       	123.66666666666667	34.0
+330202  	KINGS COUNTY HOSPITAL CENTER                        	123.1951219512195	0.0
+450289  	HARRIS HEALTH SYSTEM                                	121.15384615384616	8.0
+330182  	ST FRANCIS HOSPITAL, ROSLYN                         	119.29729729729729	42.0
+050060  	COMMUNITY REGIONAL MEDICAL CENTER                   	119.17948717948718	14.0
+140068  	ROSELAND COMMUNITY HOSPITAL                         	117.80952380952381	0.0
+320001  	UNM HOSPITAL                                        	115.525	6.0
+330306  	LUTHERAN MEDICAL CENTER                             	115.25641025641026	4.0
+050138  	KAISER FOUNDATION HOSPITAL - LOS ANGELES            	115.2	22.0
+110079  	GRADY MEMORIAL HOSPITAL                             	115.16216216216216	16.0
+010087  	UNIVERSITY OF SOUTH ALABAMA MEDICAL CENTER          	115.11428571428571	27.0
+290022  	DESERT SPRINGS HOSPITAL                             	112.86842105263158	8.0
+050292  	RIVERSIDE COUNTY REGIONAL MEDICAL CENTER            	112.75	5.0
+450213  	UNIVERSITY HEALTH SYSTEM                            	112.41463414634147	12.0
+050492  	CLOVIS COMMUNITY MEDICAL CENTER                     	112.39473684210526	29.0
+050373  	LAC+USC MEDICAL CENTER                              	112.27027027027027	8.0
+330141  	BROOKHAVEN MEMORIAL HOSPITAL MEDICAL CENTER         	112.225	7.0
+050315  	KERN MEDICAL CENTER                                 	112.17647058823529	18.0
 
+
+```
 
 
 

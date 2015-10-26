@@ -11,3 +11,5 @@ SELECT hospitals.PROVIDER_ID, hospitals.NAME, best.AVG_SCORE, surveys_hospital.A
         GROUP BY PROVIDER_ID
     ) AS surveys_hospital ON (hospitals.PROVIDER_ID = surveys_hospital.PROVIDER_ID)
   ORDER BY best.AVG_SCORE;
+  
+  
