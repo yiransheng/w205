@@ -1,11 +1,12 @@
 import csv
+import os
 
 from collections import OrderedDict
 
 # Hive default Text Format uses LazySimpleSerDe which interprets the string \N as NULL when importing.
 NULL_FMT = "\N"
 
-data_home = "hdfs:///user/root/hospital_compare"
+data_home = "hdfs:///user/" + os.environ['USER'] + "/hospital_compare"
 
 def convert_int(s):
     try:
