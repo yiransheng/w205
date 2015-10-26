@@ -2,11 +2,6 @@ import re
 
 from pyspark import SparkContext
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
-
 import utils
 
 def main():
