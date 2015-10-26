@@ -165,3 +165,55 @@ LOCATION '/user/root/hospital_compare/surveys_data';
 ```
 
 ## Investigations
+
+* What hospitals are models of high-quality care—that is, which hospitals have the most consistently high scores for a variety of procedures?
+
+__Script__: `/investigations/best_hospitals/best_hospitals.sql`
+
+__Results:__
+
+```
+
+```
+
+*  What states are models of high-quality care?
+
+__Script__: `/investigations/best_states/best_states.sql`
+
+__Results:__
+
+```
+
+```
+
+*  Which procedures have the greatest variability between hospitals?
+
+__Script__: `/investigations/hospital_variability/hospital_variability.sql`
+
+__Results:__
+
+```
+
+```
+
+* Are average scores for hospital quality or procedural variability correlated with patient survey responses?
+
+__Script__: `/investigations/hospitals_and_patients/hospitals_and_patients.sql`
+
+__Results:__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,5 +3,5 @@ SELECT hospitals.PROVIDER_ID, hospitals.NAME, best.AVG_SCORE
     SELECT PROVIDER_ID, AVG(SCORE) AS AVG_SCORE FROM procedures
       WHERE SCORE IS NOT NULL
       GROUP BY PROVIDER_ID
-  ) AS best ON (hospitals.PROVIDER_ID = best.PROVIDER_ID);
+  ) AS best ON (hospitals.PROVIDER_ID = best.PROVIDER_ID)
   ORDER BY best.AVG_SCORE;
