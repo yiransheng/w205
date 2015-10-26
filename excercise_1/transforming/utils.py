@@ -34,6 +34,8 @@ def to_row_sep(line,d=','):
 
 
 def escape_part(part):
+    if not isinstance(part, str):
+        return str(part)
     return part.replace(',', "\\,").replace('\n', ' ')
 
 def to_row_string(line_parts):
