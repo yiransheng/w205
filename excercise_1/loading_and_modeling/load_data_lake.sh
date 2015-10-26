@@ -2,7 +2,8 @@ wget -O Hospital_Revised_Flatfiles.zip https://data.medicare.gov/views/bg9k-emty
 
 mkdir tmp
 unzip Hospital_Revised_Flatfiles.zip -d tmp
-cd tmp && ls *.csv -l
+
+cd tmp
 
 # hospital data 
 tail -n +2 Hospital\ General\ Information.csv > ../hospitals.csv
