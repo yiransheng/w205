@@ -18,6 +18,8 @@ cd ..
 HDFS_CSV_DEST="/user/$USER/hospital_compare"
 hdfs dfs -mkdir -p $HDFS_CSV_DEST 
 
+hdfs dfs -chmod 1777 $HDFS_CSV_DEST
+
 hdfs dfs -copyFromLocal ./*.csv $HDFS_CSV_DEST
 
 # for the lazy, set permissive access
