@@ -12,22 +12,6 @@ except ImportError:
 
 import utils
 
-def map_headers(new_headers, orig_headers):
-    '''
-    Produces a ordered dict that maps header name to indices in original file
-    if no header exist in original file, index is set to -1
-    '''
-    origdict = dict(zip(orig_headers, range( len(orig_headers) )))
-    new_header_pairs = [
-        (h, origdict[h]) if h in origdict else (h, -1) \
-        for h in new_headers
-    ]
-    return OrderedDict(new_header_pairs)
-
-def to_row_sep(line,d=','):
-    for r in csv.reader([line.encode('utf-8')], delimiter=d):
-        return r
-
 def transform_row(line_parts, new_headers, orig_headers):
     '''
     transform a single csv line
@@ -49,17 +33,6 @@ def transform_row(line_parts, new_headers, orig_headers):
         new_line_parts.append(value)
 
     return new_line_parts
-
-def to_row_string(line_parts):
-    out = StringIO()
-    # we will leave int type unquoted and quote everything else
-    writer = csv.writer(out, quoting=csv.QUOTE_MINIMAL)
-    writer.writerow(line_parts)
-
-    csv_string = out.getvalue()
-    out.close()
-    return csv_string.strip()
-
 
 eff_care_headers = [
   "Provider ID",
@@ -121,14 +94,14 @@ def main():
 
     transform1 = partial(transform_row,
                         orig_headers=eff_care_headers,
-                        new_headers=map_headers(proc_headers, eff_care_headers))
+                        new_headers=utils.map_headers(proc_headers, eff_care_headers))
     transform2 = partial(transform_row,
                         orig_headers=readmission_headers,
-                        new_headers=map_headers(proc_headers, readmission_headers))
+                        new_headers=utils.map_headers(proc_headers, readmission_headers))
 
 
-    transformed_eff = src_effcare.map(to_row_sep).map(transform1).map(to_row_string)
-    transformed_readmission = src_readmission.map(to_row_sep).map(transform2).map(to_row_string)
+    transformed_eff = src_effcare.map(utils.to_row_sep).map(transform1).map(utils.to_row_string)
+    transformed_readmission = src_readmission.map(utils.to_row_sep).map(transform2).map(utils.to_row_string)
 
     (transformed_eff + transformed_readmission) \
         .saveAsTextFile(utils.data_home + "/procedures_data")
